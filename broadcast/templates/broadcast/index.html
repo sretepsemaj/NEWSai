@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broadcast Home</title>
+    <style>
+        .box {
+            border: 2px solid #000; /* Border color */
+            padding: 10px;          /* Space inside the box */
+            margin: 20px;           /* Space outside the box */
+            width: fit-content;     /* Adjust the width to fit content */
+        }
+    </style>
+</head>
+<body>
+    {% load static %} <!-- Load the static template tag library -->
+    
+    <h1>Welcome to NEWSai a LLM driven news processing sysytem! </h1>
+    <p>where LLM are used to sift through insane amount of data to make</p>
+    <p>all types of new news outlets possible the ability to take twelve differnt angles of</p>
+    <p>one event and being able to not only source your info but also deliver both sides of an</p>
+    <p>event and their grievances. this is just a demo, to prove that LLMs can do the writing</p>
+    <p>Just what they are fed and how to cataloge it for critizism is vital.</p>
+    <p></p>
+    <p>Work flow is the reporter makes the story the director makes the telepromter  </p>
+    <p>and we train a anchorman to deliver the news to the people and even personlizes it if we like.</p>
+    <p></p>
+    <p>okay have fun playing around.</p>
+    <ul>
+        <li><a href="{% url 'reporter' %}">Reporter will find the political story</a></li>
+        <li><a href="{% url 'director' %}">Director will take the story and make a teleprompter</a></li>
+        <li><a href="{% url 'anchorman' %}">Anchorman will deliver the generated story</a></li>
+        <li><a href="{% url 'paperboy' %}">Paperboy is supposed to take the news to the people</a></li>
+    </ul>
+
+    <div class="box">
+        <h2>white paper</h2>
+        <a href="{% static 'files/whtpaper.txt' %}">click here for whtpaper</a>
+    </div>
+</body>
+</html>

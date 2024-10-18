@@ -1,0 +1,21 @@
+<h1>Paperboy Page</h1>
+
+{% if mp3_url %}
+    <h2>Generated MP3:</h2>
+    <audio controls>
+        <source src="{{ mp3_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <li><a href="{% url 'reporter' %}">Reporter Page/a></li>
+    <li><a href="{% url 'director' %}">Director Page</a></li>
+    <li><a href="{% url 'anchorman' %}">Anchorman Page</a></li>
+    {% if headline %}
+        <h2>EXTRA! EXTRA! tech with tim might join the newsai platform, but nothing as been substanciated:</h2>
+        <p>{{ headline }}</p>
+    {% else %}
+        <p>No headline generated yet.</p>
+    {% endif %}
+{% else %}
+    <p>No MP3 found. Please generate one on the Anchorman page.</p>
+    
+{% endif %}

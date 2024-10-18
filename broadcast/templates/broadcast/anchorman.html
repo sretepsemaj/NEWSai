@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anchorman Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Anchorman Page</h1>
+
+    <h2>Teleprompter Script:</h2>
+    <p id="script">{{ script }}</p>
+
+    <h2>Generated MP3:</h2>
+    <audio id="audio-player" controls>
+        <source id="audio-source" src="{{ mp3_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br><br>
+    <!-- Button to initiate MP3 generation -->
+    <button id="generate-mp3">Generate MP3</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#generate-mp3').click(function() {
+                $.ajax({
+                    url: "{% url 'anchorman' %}",  // Ensure this matches your Django URL
+                    method: "POST",
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    data: JSON.stringify({ "action": "generate_mp3" }),
+                    contentType: "application/json",
+                    success: function(response) {
+                        // Set the new MP3 URL if generation was successful
+                        $('#audio-source').attr('src', response.mp3_url);
+                        $('#audio-player')[0].load();  // Reload the audio player
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <a href="/">Go to Home</a>
+</body>
+</html>

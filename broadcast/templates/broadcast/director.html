@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Director Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Director Page</h1>
+
+    <h2>News Story:</h2>
+    <p>{{ reporter_response }}</p>
+
+    <h2>Teleprompter Script:</h2>
+    <p id="script">{{ teleprompter_script }}</p>
+
+    <!-- Add CSRF token -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <button id="generate-script">Generate Teleprompter Script -try in again if it doesnt generate right the first time.</button>
+
+    <script>
+        // Function to get the CSRF token from the hidden input field
+        function getCSRFToken() {
+            return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        }
+
+        $(document).ready(function() {
+            $('#generate-script').click(function() {
+                $.ajax({
+                    url: "{% url 'director' %}",  // Ensure this matches your Django URL pattern
+                    method: "POST",
+                    headers: { 
+                        "X-Requested-With": "XMLHttpRequest", 
+                        "X-CSRFToken": getCSRFToken()  // Add CSRF token here
+                    },
+                    data: JSON.stringify({ "action": "generate_script" }),
+                    contentType: "application/json",
+                    success: function(response) {
+                        $('#script').text(response.teleprompter_script);
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <a href="{% url 'reporter' %}">Back to Reporter Page</a>
+    <a href="{% url 'anchorman' %}">have the anchorman deliver the script</a>
+</body>
+</html>
