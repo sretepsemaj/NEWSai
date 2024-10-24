@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+</head>
+<body>
+    <h1>Top Headlines</h1>
+    <ul>
+        {% for article in top_headlines %}
+            <li>
+                <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+                <br>
+                <strong>Source:</strong> {{ article.source.name }}  <!-- Display the source name -->
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>All Articles</h2>
+    <ul>
+        {% for article in all_articles %}
+            <li>
+                <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+                <br>
+                <strong>Source:</strong> {{ article.source.name }}  <!-- Display the source name -->
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

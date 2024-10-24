@@ -1,0 +1,23 @@
+<!-- your_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Embedding Result</title>
+</head>
+<body>
+    <h1>Embedding Result</h1>
+
+    {% if article %}
+        <h2>Article: {{ article.title }}</h2>
+        <p>Source: {{ article.source }}</p>
+        <p>URL: <a href="{{ article.url }}">{{ article.url }}</a></p>
+        <p>Date Extracted: {{ article.date_extracted }}</p>
+        <h3>Embedding:</h3>
+        <pre>{{ embedding_result|safe }}</pre>
+    {% else %}
+        <p>No article found.</p>
+    {% endif %}
+</body>
+</html>
+ 

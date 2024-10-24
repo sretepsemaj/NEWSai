@@ -10,6 +10,15 @@ from django.views.decorators.csrf import csrf_exempt
 import requests 
 import tempfile
 import shutil
+from newsapi import NewsApiClient
+from bs4 import BeautifulSoup
+from datetime import datetime
+from .models import Article, ArticleEmbedding
+from django.utils import timezone
+from sentence_transformers import SentenceTransformer
+
+
+newsapi = NewsApiClient(api_key=settings.NEWS_API_KEY)
 
 def index_view(request):
     return render(request, 'broadcast/index.html')
@@ -84,7 +93,41 @@ def reporter_view(request):
     story = request.session.get('news_story', '')
     return render(request, 'broadcast/reporter.html', {'story': story})
 
+def generate_embedding_view(request):
+    # Load the embedding model
+    model = SentenceTransformer('all-MiniLM-L6-v2')
 
+    # Fetch all articles from the database
+    articles = Article.objects.all()
+    embeddings_results = []
+
+    for article in articles:
+        # Prepare the input text for embedding
+        input_text = f"Title: {article.title}\nContent: {article.content}\nURL: {article.url}\nDate Extracted: {article.date_extracted}"
+
+        # Check the length of the input text
+        if len(input_text) > 512:  # Typical limit for many transformer models
+            input_text = input_text[:512]  # Truncate to the first 512 characters
+
+        # Generate the embedding
+        embedding = model.encode(input_text)
+
+        # Store the embedding in the ArticleEmbedding model
+        ArticleEmbedding.objects.update_or_create(
+            article=article,  # The Article instance
+            defaults={'vector': embedding.tolist()}  # Convert the embedding to a list and store
+        )
+
+        # Append the article and its embedding result to the list
+        embeddings_results.append({
+            'article': article,
+            'embedding': embedding.tolist()  # Store the embedding for rendering
+        })
+
+    # Render the results in a template
+    return render(request, 'embed.html', {
+        'embeddings_results': embeddings_results
+    })
 
 @never_cache
 def director_view(request):
@@ -197,3 +240,122 @@ def anchorman_view(request):
         'script': script,
         'mp3_url': mp3_url
     })
+
+def news_view(request):
+    # Fetch top headlines related to American elections
+    top_headlines = newsapi.get_top_headlines(q='American election',
+                                              language='en',
+                                              country='us')
+
+    # Fetch all articles related to American elections (optional)
+    all_articles = newsapi.get_everything(q='American election',
+                                          language='en',
+                                          sort_by='relevancy')
+
+    # Pass the fetched articles to the template
+    context = {
+        'top_headlines': top_headlines['articles'],  # Extracting the articles
+        'all_articles': all_articles['articles']     # Extracting all articles
+    }
+    
+    return render(request, 'news.html', context)
+
+def article_detail(request, url):
+    # Fetch article content from the provided URL
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        content = response.text  # Get the HTML content of the article
+    else:
+        content = "Could not retrieve article content."
+
+    # Pass the content to the template
+    return render(request, 'article_detail.html', {'content': content})
+
+def fetch_and_save_articles():
+    """Fetch articles from the news page and save them to the database."""
+    print("Fetching articles from the news page...")
+    url = "http://127.0.0.1:8000/broadcast/news/"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
+    }
+    
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise an error for bad responses
+        print("Successfully fetched the news page.")
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        articles = soup.find_all('li')  # Adjust based on your HTML structure
+        print(f"Found {len(articles)} articles.")
+
+        for article in articles:
+            title_element = article.find('a')
+            if not title_element:
+                print("No title element found, skipping this article.")
+                continue
+
+            title = title_element.text.strip()
+            link = title_element['href']
+            print(f"Processing article: {title} | Link: {link}")
+
+            # Fetch article details
+            article_title, article_content = fetch_article_content(link)
+
+            if article_title and article_content:
+                # Save to database
+                Article.objects.create(
+                    title=article_title,
+                    source='Unknown source',  # Default or extract from content if needed
+                    content=article_content,
+                    published_at=timezone.now(),  # Use timezone-aware now
+                    author='Unknown',  # Default or extract if available
+                    url=link,
+                    description='No description',  # Default or extract if available
+                    image_url='No image',  # Default or extract if available
+                    keywords='No keywords'  # Default or extract if available
+                )
+                print(f"Successfully saved article: {title}")
+            else:
+                print(f"Failed to fetch content for article: {title}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred while making the request: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+    print("Finished fetching and saving articles.")
+
+def fetch_article_content(url):
+    """Fetch the title and content of a single article."""
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        title_tag = soup.find('h1')
+        title = title_tag.text.strip() if title_tag else "Title not found"
+
+        paragraphs = soup.find_all('p')
+        content = ' '.join([para.text.strip() for para in paragraphs if para.text.strip()])
+
+        return title, content
+
+    except Exception as e:
+        print(f"Error fetching {url}: {e}")
+        return None, None
+
+def fetch_articles_view(request):
+    """View to fetch and save articles, then render a success page."""
+    fetch_and_save_articles()
+    
+    # Render the success template if fetching was successful
+    try:
+        return render(request, 'fetch_success.html')  # Ensure fetch_success.html exists
+    except TemplateDoesNotExist:
+        print("Template 'fetch_success.html' does not exist.")
+        return render(request, 'error.html', {'message': "Template not found."})
+    
+def articles_list_view(request):
+    articles = Article.objects.all()  # Fetch all articles from the database
+    return render(request, 'articles_list.html', {'articles': articles})  # Render the articles list template

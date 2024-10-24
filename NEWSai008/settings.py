@@ -122,6 +122,7 @@ MYSK_API_KEY = os.getenv('MYSK_API_KEY')
 PLEX_API_KEY = os.getenv('PLEX_API_KEY')
 CROQ_API_KEY = os.getenv('CROQ_API_KEY')
 HUGG_API_KEY = os.getenv('HUGG_API_KEY')
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 # Load API URLs from .env
 HUGG_API_URL = os.getenv('HUGG_API_URL')
