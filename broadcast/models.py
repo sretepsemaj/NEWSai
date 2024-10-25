@@ -22,3 +22,20 @@ class ArticleEmbedding(models.Model):
 
     def __str__(self):
         return f"Embedding for {self.article.title}"
+
+class ArticleGroq(models.Model):
+    STATUS_CHOICES = [
+        ('processed', 'Processed Successfully'),
+        ('skipped', 'Skipped (Too Long)'),
+    ]
+
+    title = models.CharField(max_length=255)  # Article title
+    polarized_content = models.TextField(blank=True, null=True)  # Processed content
+    url = models.URLField()  # Link to the original article
+    published_at = models.DateTimeField()  # Article's published date
+    date_processed = models.DateTimeField(auto_now_add=True)  # Timestamp for processing
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='processed'
+    )  # Track processing status

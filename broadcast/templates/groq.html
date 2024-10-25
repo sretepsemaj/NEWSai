@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processed Articles - Groq</title>
+</head>
+<body>
+    <h1>Processed Articles</h1>
+
+    <p><strong>Successfully Processed:</strong> {{ success_count }}</p>
+    <p><strong>Skipped (Too Long or Errors):</strong> {{ skipped_count }}</p>
+
+    {% for article in articles %}
+        <div style="border: 1px solid #000; margin-bottom: 20px; padding: 10px;">
+            <h2>{{ article.title }}</h2>
+            <p><strong>Published At:</strong> {{ article.published_at }}</p>
+            <p><a href="{{ article.url }}" target="_blank">Read Full Article</a></p>
+
+            {% if article.status == 'processed' %}
+                <h3>Polarized Summary</h3>
+                <pre>{{ article.polarized_content }}</pre>
+            {% else %}
+                <p><em>This article was skipped due to excessive length or an error.</em></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>

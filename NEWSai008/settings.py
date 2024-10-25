@@ -120,7 +120,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MYSK_API_KEY = os.getenv('MYSK_API_KEY')
 PLEX_API_KEY = os.getenv('PLEX_API_KEY')
-CROQ_API_KEY = os.getenv('CROQ_API_KEY')
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 HUGG_API_KEY = os.getenv('HUGG_API_KEY')
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
@@ -140,7 +140,33 @@ SESSION_SAVE_EVERY_REQUEST = False  # Only save the session if it's modified
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'django_info.log',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'broadcast': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 
 

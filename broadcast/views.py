@@ -13,12 +13,18 @@ import shutil
 from newsapi import NewsApiClient
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .models import Article, ArticleEmbedding
+from .models import Article, ArticleEmbedding, ArticleGroq
 from django.utils import timezone
 from sentence_transformers import SentenceTransformer
+from groq import Groq
+import logging
 
+# Initialize the logger at the top of the file
+logger = logging.getLogger(__name__)
 
 newsapi = NewsApiClient(api_key=settings.NEWS_API_KEY)
+
+client = Groq(api_key=settings.GROQ_API_KEY)
 
 def index_view(request):
     return render(request, 'broadcast/index.html')
@@ -359,3 +365,89 @@ def fetch_articles_view(request):
 def articles_list_view(request):
     articles = Article.objects.all()  # Fetch all articles from the database
     return render(request, 'articles_list.html', {'articles': articles})  # Render the articles list template
+
+def article_groq_view(request):
+    # Retrieve all articles from the Article model
+    articles = Article.objects.all()
+
+    # Counters to track progress
+    success_count = 0
+    skipped_count = 0
+
+    # Loop through the articles and process them
+    for article in articles:
+        logger.info(f"Processing: {article.title} - {article.content[:50]}...")
+
+        # Check if the article fits within the 8k token limit
+        if len(article.content) > 8192:
+            logger.warning(f"Skipping: {article.title} (content exceeds 8k tokens)")
+            ArticleGroq.objects.create(
+                title=article.title,
+                polarized_content=None,
+                url=article.url,
+                published_at=article.published_at,
+                status='skipped'
+            )
+            skipped_count += 1
+            continue
+
+        try:
+            # Prepare the API request payload
+            messages = [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a helpful assistant. Take the following article "
+                        "and break it down into its most important key components. "
+                        "Label the information based on whether it aligns with "
+                        "Republican or Democratic viewpoints, focusing on polarized "
+                        "yet objective details."
+                    ),
+                },
+                {"role": "user", "content": article.content},
+            ]
+
+            # Call the Groq API
+            response = client.chat.completions.create(
+                messages=messages,
+                model="mixtral-8x7b-32768",
+                temperature=0.5,
+                max_tokens=8192,
+                top_p=1,
+                stream=True,
+            )
+
+            # Collect the response in chunks
+            polarized_summary = ""
+            for chunk in response:
+                delta_content = chunk.choices[0].delta.content or ""
+                polarized_summary += delta_content
+
+            # Save the processed article in the ArticleGroq model
+            ArticleGroq.objects.create(
+                title=article.title,
+                polarized_content=polarized_summary,
+                url=article.url,
+                published_at=article.published_at,
+                status='processed'
+            )
+            success_count += 1
+            logger.info(f"Successfully processed: {article.title}")
+
+        except Exception as e:
+            logger.error(f"Error processing {article.title}: {str(e)}")
+            skipped_count += 1
+
+    # Log the final counts
+    logger.info(f"Processing complete. Success: {success_count}, Skipped: {skipped_count}")
+
+    # Retrieve all entries from ArticleGroq for rendering
+    processed_articles = ArticleGroq.objects.all()
+
+    # Render the groq.html template with the processed articles
+    context = {
+        "articles": processed_articles,
+        "success_count": success_count,
+        "skipped_count": skipped_count,
+    }
+    return render(request, "groq.html", context)

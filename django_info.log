@@ -1,0 +1,55 @@
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/groq/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 436, in article_groq_view
+    logger.info(f"Processing complete. Success: {success_count}, Skipped: {skipped_count}")
+    ^^^^^^
+NameError: name 'logger' is not defined
+"GET /broadcast/groq/ HTTP/1.1" 500 73992
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/groq/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 442, in article_groq_view
+    processed_articles = ArticleGroq.objects.all()
+                         ^^^^^^^^^^^
+NameError: name 'ArticleGroq' is not defined
+"GET /broadcast/groq/ HTTP/1.1" 500 74053
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/NEWSai008/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/groq/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 445, in article_groq_view
+    processed_articles = ArticleGroq.objects.all()
+                         ^^^^^^^^^^^
+NameError: name 'ArticleGroq' is not defined
+"GET /broadcast/groq/ HTTP/1.1" 500 74053
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 371
+Watching for file changes with StatReloader
+"GET /broadcast/news/ HTTP/1.1" 200 36060
+"GET /broadcast/news/ HTTP/1.1" 200 36060
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 387
+"GET /broadcast/news/ HTTP/1.1" 200 36060
+"GET /broadcast/articles/ HTTP/1.1" 200 747160
+"GET /broadcast/groq/ HTTP/1.1" 200 167265
