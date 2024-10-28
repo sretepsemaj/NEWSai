@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Republican Viewpoint Analysis</title>
+</head>
+<body>
+    <h1>Republican Viewpoint Analysis</h1>
+
+    {% if summaries %}
+        {% for article in summaries %}
+            <div style="border: 1px solid #000; margin-bottom: 20px; padding: 10px;">
+                <h2>{{ article.title }}</h2>
+                <p><strong>Published At:</strong> {{ article.published_at }}</p>
+                <p><a href="{{ article.url }}" target="_blank">Read Full Article</a></p>
+                <h3>Republican Viewpoint Summary</h3>
+                <pre>{{ article.summary }}</pre>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No articles available for analysis.</p>
+    {% endif %}
+</body>
+</html>

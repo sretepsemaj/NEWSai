@@ -13,6 +13,7 @@ urlpatterns = [
     path('articles/', views.articles_list_view, name='articles_list'),  # No 'broadcast/' prefix needed
     path('generate-embed/', views.generate_embedding_view, name='generate_embedding_view'),  # Update to the correct view name
     path('groq/', views.article_groq_view, name='article_groq'),
+    path('republic/', views.article_republic_view, name='article_republic_view'),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

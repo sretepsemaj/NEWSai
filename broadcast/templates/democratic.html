@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Democratic Articles</title>
+</head>
+<body>
+    <h1>Democratic Articles</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.content }}</p>
+                <p><a href="{{ article.url }}" target="_blank">Read more</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -53,3 +53,111 @@ Watching for file changes with StatReloader
 "GET /broadcast/news/ HTTP/1.1" 200 36060
 "GET /broadcast/articles/ HTTP/1.1" 200 747160
 "GET /broadcast/groq/ HTTP/1.1" 200 167265
+Watching for file changes with StatReloader
+Not Found: /broadcast/republican/
+"GET /broadcast/republican/ HTTP/1.1" 404 5437
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 99
+Not Found: /broadcast/republic
+"GET /broadcast/republic HTTP/1.1" 404 5428
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic HTTP/1.1" 301 0
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/republic/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 466, in article_republic_view
+    logger.info(f"Processing: {article.title} - {article.content[:50]}...")
+                                                 ^^^^^^^^^^^^^^^
+AttributeError: 'ArticleGroq' object has no attribute 'content'
+"GET /broadcast/republic/ HTTP/1.1" 500 75180
+"GET /broadcast/groq/ HTTP/1.1" 200 447693
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/republic/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 467, in article_republic_view
+    logger.info(f"Processing: {article.title} - {article.content[:50]}...")
+                                                 ^^^^^^^^^^^^^^^
+AttributeError: 'ArticleGroq' object has no attribute 'content'
+"GET /broadcast/republic/ HTTP/1.1" 500 75311
+Internal Server Error: /broadcast/republic/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 467, in article_republic_view
+    logger.info(f"Processing: {article.title} - {article.content[:50]}...")
+                                                 ^^^^^^^^^^^^^^^
+AttributeError: 'ArticleGroq' object has no attribute 'content'
+"GET /broadcast/republic/ HTTP/1.1" 500 75448
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 369
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 369
+"GET /broadcast/republic/ HTTP/1.1" 200 369
+"GET /broadcast/republic/ HTTP/1.1" 200 659
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 371
+"GET /broadcast/republic/ HTTP/1.1" 200 491
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 469
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 483
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 371837

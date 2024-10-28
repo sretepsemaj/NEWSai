@@ -18,6 +18,7 @@ from django.utils import timezone
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 import logging
+import time
 
 # Initialize the logger at the top of the file
 logger = logging.getLogger(__name__)
@@ -451,3 +452,90 @@ def article_groq_view(request):
         "skipped_count": skipped_count,
     }
     return render(request, "groq.html", context)
+
+
+def fetch_republican_viewpoints():
+    # Fetch all articles from the ArticleGroq model
+    articles = ArticleGroq.objects.all()
+
+    if not articles:
+        logger.warning("No articles found in ArticleGroq.")
+        return [{"title": "No articles available", "summary": "No analysis available"}]
+
+    all_summaries = []  # Store summaries for each article
+
+    # Loop through each article and fetch its Republican viewpoint
+    for article in articles:
+        logger.info(f"Processing Article: {article.title}")
+
+        # Use the article's polarized_content or a fallback
+        article_content = article.polarized_content or "No content available for analysis."
+        logger.info(f"Article Content Preview: {article_content[:100]}")
+
+        # Prepare the message payload with the article's content
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "You are a political analyst. Analyze the article below "
+                    "and extract key components relevant to Republican views."
+                ),
+            },
+            {
+                "role": "user",
+                "content": article_content,
+            },
+        ]
+
+        try:
+            # Make the streaming API call
+            completion = client.chat.completions.create(
+                model="llama3-8b-8192",
+                messages=messages,
+                temperature=0.7,
+                max_tokens=1024,
+                top_p=1,
+                stream=True,
+                stop=None,
+            )
+
+            # Collect the streamed content into a single string
+            response_content = "".join(
+                chunk.choices[0].delta.content or "" for chunk in completion
+            ).strip()
+
+            if not response_content:
+                response_content = "No significant Republican viewpoints found."
+
+            # Store the title and summary
+            all_summaries.append({
+                "title": article.title,
+                "summary": response_content,
+                "url": article.url,
+                "published_at": article.published_at,
+            })
+
+            logger.info(f"Successfully processed: {article.title}")
+
+        except Exception as e:
+            logger.error(f"Error processing {article.title}: {str(e)}")
+            all_summaries.append({
+                "title": article.title,
+                "summary": f"Error: {str(e)}",
+                "url": article.url,
+                "published_at": article.published_at,
+            })
+
+    return all_summaries
+
+def article_republic_view(request):
+    # Fetch the analysis results for all articles
+    summaries = fetch_republican_viewpoints()
+
+    # Prepare the context for rendering the template
+    context = {
+        "summaries": summaries,
+    }
+
+    # Render the `republic.html` template with the analysis results
+    return render(request, "republic.html", context)
