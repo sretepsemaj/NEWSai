@@ -13,7 +13,7 @@ import shutil
 from newsapi import NewsApiClient
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .models import Article, ArticleEmbedding, ArticleGroq
+from .models import Article, ArticleEmbedding, ArticleGroq, RepArticle
 from django.utils import timezone
 from sentence_transformers import SentenceTransformer
 from groq import Groq
@@ -507,13 +507,15 @@ def fetch_republican_viewpoints():
             if not response_content:
                 response_content = "No significant Republican viewpoints found."
 
-            # Store the title and summary
-            all_summaries.append({
-                "title": article.title,
-                "summary": response_content,
-                "url": article.url,
-                "published_at": article.published_at,
-            })
+            # Save the summary to the RepArticle model
+            rep_article = RepArticle(
+                title=article.title,
+                summary=response_content,
+                url=article.url,
+                published_at=article.published_at,
+            )
+            rep_article.save()  # Save the entry to the database
+            all_summaries.append(rep_article)  # Append the saved instance for rendering
 
             logger.info(f"Successfully processed: {article.title}")
 
@@ -529,8 +531,11 @@ def fetch_republican_viewpoints():
     return all_summaries
 
 def article_republic_view(request):
-    # Fetch the analysis results for all articles
-    summaries = fetch_republican_viewpoints()
+    # Call the fetch_republican_viewpoints function to analyze and save articles
+    fetch_republican_viewpoints()  # Ensure this function is called to process the articles
+
+    # Fetch all saved summaries from the RepArticle model
+    summaries = RepArticle.objects.all().order_by('-created_at')
 
     # Prepare the context for rendering the template
     context = {
