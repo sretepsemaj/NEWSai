@@ -162,3 +162,7 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 "GET /broadcast/republic/ HTTP/1.1" 200 371837
 Watching for file changes with StatReloader
+<<<<<<< HEAD
+=======
+"GET /broadcast/republic/ HTTP/1.1" 200 746473
+>>>>>>> test3
