@@ -13,7 +13,7 @@ import shutil
 from newsapi import NewsApiClient
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .models import Article, ArticleEmbedding, ArticleGroq, RepArticle
+from .models import Article, ArticleEmbedding, ArticleGroq, RepArticle, DemArticle
 from django.utils import timezone
 from sentence_transformers import SentenceTransformer
 from groq import Groq
@@ -544,3 +544,94 @@ def article_republic_view(request):
 
     # Render the `republic.html` template with the analysis results
     return render(request, "republic.html", context)
+
+def fetch_democratic_viewpoints():
+    # Fetch all articles from the ArticleGroq model
+    articles = ArticleGroq.objects.all()
+
+    if not articles:
+        logger.warning("No articles found in ArticleGroq.")
+        return [{"title": "No articles available", "summary": "No analysis available"}]
+
+    all_summaries = []  # Store summaries for each article
+
+    # Loop through each article and fetch its Democratic viewpoint
+    for article in articles:
+        logger.info(f"Processing Article: {article.title}")
+
+        # Use the article's polarized_content or a fallback
+        article_content = article.polarized_content or "No content available for analysis."
+        logger.info(f"Article Content Preview: {article_content[:100]}")
+
+        # Prepare the message payload with the article's content
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "You are a political analyst. Analyze the article below "
+                    "and extract key components relevant to Democratic views."
+                ),
+            },
+            {
+                "role": "user",
+                "content": article_content,
+            },
+        ]
+
+        try:
+            # Make the streaming API call
+            completion = client.chat.completions.create(
+                model="llama3-8b-8192",
+                messages=messages,
+                temperature=0.7,
+                max_tokens=1024,
+                top_p=1,
+                stream=True,
+                stop=None,
+            )
+
+            # Collect the streamed content into a single string
+            response_content = "".join(
+                chunk.choices[0].delta.content or "" for chunk in completion
+            ).strip()
+
+            if not response_content:
+                response_content = "No significant Democratic viewpoints found."
+
+            # Save the summary to the DemArticle model
+            dem_article = DemArticle(
+                title=article.title,
+                summary=response_content,
+                url=article.url,
+                published_at=article.published_at,
+            )
+            dem_article.save()  # Save the entry to the database
+            all_summaries.append(dem_article)  # Append the saved instance for rendering
+
+            logger.info(f"Successfully processed: {article.title}")
+
+        except Exception as e:
+            logger.error(f"Error processing {article.title}: {str(e)}")
+            all_summaries.append({
+                "title": article.title,
+                "summary": f"Error: {str(e)}",
+                "url": article.url,
+                "published_at": article.published_at,
+            })
+
+    return all_summaries
+
+def article_democratic_view(request):
+    # Call the fetch_democratic_viewpoints function to analyze and save articles
+    fetch_democratic_viewpoints()  # Ensure this function is called to process the articles
+
+    # Fetch all saved summaries from the DemArticle model
+    summaries = DemArticle.objects.all().order_by('-created_at')
+
+    # Prepare the context for rendering the template
+    context = {
+        "summaries": summaries,
+    }
+
+    # Render the `democratic.html` template with the analysis results
+    return render(request, "democratic.html", context)   

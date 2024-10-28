@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Democratic Articles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Democratic Viewpoints</title>
 </head>
 <body>
-    <h1>Democratic Articles</h1>
+    <h1>Democratic Viewpoints</h1>
     <ul>
-        {% for article in articles %}
+        {% for summary in summaries %}
             <li>
-                <h2>{{ article.title }}</h2>
-                <p>{{ article.content }}</p>
-                <p><a href="{{ article.url }}" target="_blank">Read more</a></p>
+                <h2>{{ summary.title }}</h2>
+                <p>{{ summary.summary }}</p>
+                <p><a href="{{ summary.url }}">Read more</a></p>
+                <p>Published at: {{ summary.published_at }}</p>
             </li>
+        {% empty %}
+            <li>No articles available.</li>
         {% endfor %}
     </ul>
 </body>

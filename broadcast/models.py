@@ -40,7 +40,6 @@ class ArticleGroq(models.Model):
         default='processed'
     )  # Track processing status
 
-from django.db import models
 
 class RepArticle(models.Model):
     title = models.CharField(max_length=255)
@@ -51,3 +50,14 @@ class RepArticle(models.Model):
 
     def __str__(self):
         return self.title
+
+class DemArticle(models.Model):
+    title = models.CharField(max_length=255)
+    summary = models.TextField()
+    url = models.URLField()
+    published_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+

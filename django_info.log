@@ -166,3 +166,12 @@ Watching for file changes with StatReloader
 =======
 "GET /broadcast/republic/ HTTP/1.1" 200 746473
 >>>>>>> test3
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 1124252
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 464362
