@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Generation</title>
+</head>
+<body>
+    <h1>Text Generation with Llama 3.2</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="prompt">Enter Prompt:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if result %}
+        <h2>Generated Text:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+
+    {% if error %}
+        <h2 style="color: red;">Error: {{ error }}</h2>
+    {% endif %}
+</body>
+</html>

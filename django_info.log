@@ -175,3 +175,35 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 "GET /broadcast/groq/ HTTP/1.1" 200 464362
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/generate HTTP/1.1" 301 0
+"GET /broadcast/generate/ HTTP/1.1" 200 669
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/generate/ HTTP/1.1" 200 597
+Internal Server Error: /broadcast/generate/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 669, in generate_view
+    result = generate_text(prompt)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 642, in generate_text
+    "Authorization": f"Bearer {settings.HUGG_FACE_API_KEY}",
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Settings' object has no attribute 'HUGG_FACE_API_KEY'. Did you mean: 'HUGG_API_KEY'?
+"POST /broadcast/generate/ HTTP/1.1" 500 82755
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/generate/ HTTP/1.1" 200 597
+"POST /broadcast/generate/ HTTP/1.1" 200 1136

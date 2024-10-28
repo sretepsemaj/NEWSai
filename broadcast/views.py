@@ -634,4 +634,42 @@ def article_democratic_view(request):
     }
 
     # Render the `democratic.html` template with the analysis results
-    return render(request, "democratic.html", context)   
+    return render(request, "democratic.html", context)
+
+def generate_text(prompt):
+    url = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
+    headers = {
+        "Authorization": f"Bearer {settings.HUGG_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "inputs": prompt,
+        "options": {
+            "use_cache": False,
+            "max_length": 100
+        }
+    }
+    
+    response = requests.post(url, headers=headers, json=payload)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": response.text}
+
+def generate_view(request):
+    result = None
+    error = None
+
+    if request.method == "POST":
+        prompt = request.POST.get("prompt", "")
+
+        if prompt:
+            result = generate_text(prompt)
+            # Handle any error in result if needed
+        else:
+            error = "No prompt provided"
+    
+    # Render the template with results or error message
+    return render(request, 'gen.html', {'result': result, 'error': error})

@@ -15,6 +15,7 @@ urlpatterns = [
     path('groq/', views.article_groq_view, name='article_groq'),
     path('republic/', views.article_republic_view, name='article_republic_view'),
     path('democratic/', views.article_democratic_view, name='article_democratic_view'),
+    path('generate/', views.generate_view, name='generate_text'),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
