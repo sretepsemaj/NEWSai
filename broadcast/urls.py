@@ -15,7 +15,13 @@ urlpatterns = [
     path('groq/', views.article_groq_view, name='article_groq'),
     path('republic/', views.article_republic_view, name='article_republic_view'),
     path('democratic/', views.article_democratic_view, name='article_democratic_view'),
-    path('generate/', views.generate_view, name='generate_text'),
+    path('gen/', views.generated_view, name='generated_view'),
+    path('rankeddem/', views.dem_ranked_articles, name='dem_ranked_articles'),
+    path('rankedrep/', views.rep_ranked_articles, name='rep_ranked_articles'),
+    path('demstory/', views.dem_view, name='dem_view'),
+    path('repstory/', views.rep_view, name='rep_view'),
+    path('story/', views.story_view, name='story_view'),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

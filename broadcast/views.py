@@ -13,12 +13,14 @@ import shutil
 from newsapi import NewsApiClient
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .models import Article, ArticleEmbedding, ArticleGroq, RepArticle, DemArticle
+from .models import Article, ArticleEmbedding, ArticleGroq, RepArticle, DemArticle, DemRankArticle, RepRankArticle
 from django.utils import timezone
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 import logging
 import time
+import random
+
 
 # Initialize the logger at the top of the file
 logger = logging.getLogger(__name__)
@@ -399,10 +401,9 @@ def article_groq_view(request):
                     "role": "system",
                     "content": (
                         "You are a helpful assistant. Take the following article "
-                        "and break it down into its most important key components. "
-                        "Label the information based on whether it aligns with "
-                        "Republican or Democratic viewpoints, focusing on polarized "
-                        "yet objective details."
+                        "seperate the democraticn and republican points and make nbotes"
+                        "should be listed under ech heading for the republican of democrate views"
+                        "try ro always make the notes short and conccise"
                     ),
                 },
                 {"role": "user", "content": article.content},
@@ -530,11 +531,20 @@ def fetch_republican_viewpoints():
 
     return all_summaries
 
-def article_republic_view(request):
+#def article_republic_view(request):
     # Call the fetch_republican_viewpoints function to analyze and save articles
-    fetch_republican_viewpoints()  # Ensure this function is called to process the articles
+    #fetch_republican_viewpoints()  # Ensure this function is called to process the articles
 
-    # Fetch all saved summaries from the RepArticle model
+    #summaries = RepArticle.objects.all().order_by('-created_at')
+
+    #context = {
+    #    "summaries": summaries,
+    #}
+
+    #return render(request, "republic.html", context)
+
+def article_republic_view(request):
+    # Fetch all saved summaries from the DemArticle model
     summaries = RepArticle.objects.all().order_by('-created_at')
 
     # Prepare the context for rendering the template
@@ -542,7 +552,7 @@ def article_republic_view(request):
         "summaries": summaries,
     }
 
-    # Render the `republic.html` template with the analysis results
+    # Render the `democratic.html` template with the analysis results
     return render(request, "republic.html", context)
 
 def fetch_democratic_viewpoints():
@@ -621,10 +631,22 @@ def fetch_democratic_viewpoints():
 
     return all_summaries
 
-def article_democratic_view(request):
+#def article_democratic_view(request):
     # Call the fetch_democratic_viewpoints function to analyze and save articles
-    fetch_democratic_viewpoints()  # Ensure this function is called to process the articles
+    #fetch_democratic_viewpoints()  # Ensure this function is called to process the articles
 
+    
+    #summaries = DemArticle.objects.all().order_by('-created_at')
+
+    
+    #context = {
+    #    "summaries": summaries,
+    #}
+
+    
+    #return render(request, "democratic.html", context)
+
+def article_democratic_view(request):
     # Fetch all saved summaries from the DemArticle model
     summaries = DemArticle.objects.all().order_by('-created_at')
 
@@ -636,3 +658,422 @@ def article_democratic_view(request):
     # Render the `democratic.html` template with the analysis results
     return render(request, "democratic.html", context)
 
+def generate_text(system_message, user_input):
+    url = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"  # Model URL
+    headers = {
+        "Authorization": f"Bearer {settings.HUGG_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    # Construct the inputs payload directly
+    payload = {
+        "inputs": [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_input},
+        ],
+        "options": {
+            "use_cache": False,
+            "max_length": 150  # Adjust as needed
+        }
+    }
+    
+    response = requests.post(url, headers=headers, json=payload)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": response.text}
+
+def generated_view(request):
+    generated_summary = None
+    error = None
+
+    if request.method == "POST":
+        # Get user input from the form
+        user_input = request.POST.get("user_input", "")
+        system_message = request.POST.get("system_message", "You are a helpful assistant that provides random information.")
+
+        if user_input:
+            # Debugging: print user input and system message
+            print(f"User Input: {user_input}")
+            print(f"System Message: {system_message}")
+            
+            # Call the generate_text function
+            generated_response = generate_text(system_message, user_input)
+
+            # Process the response as needed
+            if 'error' not in generated_response:
+                generated_summary = generated_response.get('choices', [{}])[0].get('text', '')
+            else:
+                error = generated_response['error']
+
+    # Render the template with the generated summary or error
+    return render(request, "gen.html", {'generated_summary': generated_summary, 'error': error})
+
+def fetch_and_rank_democratic_viewpoints():
+    # Fetch all articles from the DemArticle model
+    articles = DemArticle.objects.all()
+
+    if not articles:
+        logger.warning("No articles found in DemArticle.")
+        return [{"title": "No articles available", "summary": "No analysis available"}]
+
+    all_ranked_articles = []  # Store ranked articles
+
+    # Define severity lexicon
+    severity_keywords = {
+        "government": 5,
+        "tax": 4,
+        "military": 4,
+        "abortion": 5,
+        "immigration": 4,
+        "healthcare": 4,
+        "climate": 5,
+        "education": 3
+    }
+
+    # Loop through each article and calculate its severity score
+    for article in articles:
+        logger.info(f"Processing Article: {article.title}")
+
+        # Use the article's polarized_content or a fallback
+        article_content = article.summary or "No content available for analysis."
+        logger.info(f"Article Content Preview: {article_content[:100]}")
+
+        # Calculate the severity score
+        score = calculate_severity_score(article_content, severity_keywords)
+
+        # Save the ranked summary to the DemRankArticle model
+        dem_rank_article = DemRankArticle(
+            title=article.title,
+            summary=article_content,  # You can store the original or analyzed content
+            rank=score,
+            url=article.url,
+            published_at=article.published_at,
+        )
+        dem_rank_article.save()  # Save the entry to the database
+        all_ranked_articles.append(dem_rank_article)  # Append the saved instance for rendering
+
+        logger.info(f"Successfully processed and ranked: {article.title} with score: {score}")
+
+    return all_ranked_articles
+
+def calculate_severity_score(content, severity_keywords):
+    score = 0
+    for keyword, weight in severity_keywords.items():
+        if keyword in content.lower():
+            score += weight
+    return score
+
+def dem_ranked_articles(request):
+    # Call the function to fetch and rank Democratic viewpoints
+    fetch_and_rank_democratic_viewpoints()
+
+    # Fetch all ranked articles from the DemRankArticle model
+    ranked_articles = DemRankArticle.objects.all().order_by('-rank')
+
+    # Prepare the context for rendering the template
+    context = {
+        "ranked_articles": ranked_articles,
+    }
+
+    # Render the `democratic_ranked.html` template with the ranked articles
+    return render(request, "rankeddem.html", context)
+
+def fetch_and_rank_republic_viewpoints():
+    # Fetch all articles from the RepArticle model
+    articles = RepArticle.objects.all()
+
+    if not articles:
+        logger.warning("No articles found in RepArticle.")
+        return []  # Return an empty list if no articles found
+
+    all_ranked_articles = []  # Store ranked articles
+
+    # Define severity lexicon
+    severity_keywords = {
+        "government": 5,
+        "tax": 4,
+        "military": 4,
+        "abortion": 5,
+        "immigration": 4,
+        "healthcare": 4,
+        "climate": 5,
+        "education": 3
+    }
+
+    # Loop through each article and calculate its severity score
+    for article in articles:
+        logger.info(f"Processing Article: {article.title}")
+
+        # Use the article's summary or a fallback
+        article_content = article.summary or "No content available for analysis."
+        logger.info(f"Article Content Preview: {article_content[:100]}")
+
+        # Calculate the severity score
+        score = calculate_severity_score(article_content, severity_keywords)
+
+        # Save the ranked summary to the RepRankArticle model
+        rep_rank_article = RepRankArticle(  # Match the variable name
+            title=article.title,
+            summary=article_content,
+            rank=score,
+            url=article.url,
+            published_at=article.published_at,
+        )
+        rep_rank_article.save()  # Save the entry to the database
+        all_ranked_articles.append(rep_rank_article)  # Append the correct instance
+
+        logger.info(f"Successfully processed and ranked: {article.title} with score: {score}")
+
+    return all_ranked_articles
+
+def calculate_severity_score(content, severity_keywords):
+    score = 0
+    for keyword, weight in severity_keywords.items():
+        if keyword in content.lower():
+            score += weight
+    return score
+
+def rep_ranked_articles(request):
+    # Call the function to fetch and rank Republican viewpoints
+    fetch_and_rank_republic_viewpoints()
+
+    # Fetch all ranked articles from the RepRankArticle model
+    ranked_articles = RepRankArticle.objects.all().order_by('-rank')
+
+    # Prepare the context for rendering the template
+    context = {
+        "ranked_articles": ranked_articles,
+    }
+
+    # Render the `rankedrep.html` template with the ranked articles
+    return render(request, "rankedrep.html", context)
+
+def dem_story():
+    # Fetch all ranked articles from the DemRankArticle model with a rank of 10 or above
+    ranked_articles = DemRankArticle.objects.filter(rank__gte=22)
+
+    if not ranked_articles.exists():
+        logger.warning("No ranked articles found in DemRankArticle.")
+        return "No ranked articles available to generate a story."
+
+    # Get the total number of ranked articles
+    total_articles = ranked_articles.count()
+
+    # Select a random article by using the random index
+    random_index = random.randint(0, total_articles - 1)
+    selected_article = ranked_articles[random_index]
+
+    logger.info(f"Selected Ranked Article: {selected_article.title}")
+
+    # Use the selected article's summary for the API call
+    article_content = selected_article.summary
+
+    # Prepare the message payload with the article content
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a skilled writer for a major news station. just rewrite the little info in to a nice paragraph."
+                "using the following content from a ranked article."
+            ),
+        },
+        {
+            "role": "user",
+            "content": article_content,  # Use the summary of the selected article
+        },
+    ]
+
+    try:
+        # Make the API call
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1024,  # Limit output tokens
+            top_p=1,
+            stream=False,  # Set to False for a single response
+            stop=None,
+        )
+
+        # Extract the generated story from the response
+        generated_story = completion.choices[0].message.content.strip()  # Use .content instead of indexing
+
+        if not generated_story:
+            generated_story = "No story could be generated from the ranked article."
+
+        logger.info("Story generated successfully.")
+
+    except Exception as e:
+        logger.error(f"Error generating story: {str(e)}")
+        generated_story = f"Error: {str(e)}"
+
+    return generated_story
+
+def dem_view(request):
+    # Fetch the generated story
+    story_content = dem_story()
+
+    # Prepare the context for rendering the template
+    context = {
+        "story_content": story_content,
+    }
+
+    # Render the `story.html` template with the generated story
+    return render(request, "demstory.html", context)
+
+def rep_story():
+    # Fetch all ranked articles from the DemRankArticle model with a rank of 10 or above
+    ranked_articles = ArticleGroq.objects.filter(rank__gte=4)
+
+    if not ranked_articles.exists():
+        logger.warning("No ranked articles found in DemRankArticle.")
+        return "No ranked articles available to generate a story."
+
+    # Get the total number of ranked articles
+    total_articles = ranked_articles.count()
+
+    # Select a random article by using the random index
+    random_index = random.randint(0, total_articles - 1)
+    selected_article = ranked_articles[random_index]
+
+    logger.info(f"Selected Ranked Article: {selected_article.title}")
+
+    # Use the selected article's summary for the API call
+    article_content = selected_article.summary
+
+    # Prepare the message payload with the article content
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a skilled writer for a major news station. just rewrite the little info in to a nice paragraph."
+                "using the following content from a ranked article."
+            ),
+        },
+        {
+            "role": "user",
+            "content": article_content,  # Use the summary of the selected article
+        },
+    ]
+
+    try:
+        # Make the API call
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1024,  # Limit output tokens
+            top_p=1,
+            stream=False,  # Set to False for a single response
+            stop=None,
+        )
+
+        # Extract the generated story from the response
+        generated_story = completion.choices[0].message.content.strip()  # Use .content instead of indexing
+
+        if not generated_story:
+            generated_story = "No story could be generated from the ranked article."
+
+        logger.info("Story generated successfully.")
+
+    except Exception as e:
+        logger.error(f"Error generating story: {str(e)}")
+        generated_story = f"Error: {str(e)}"
+
+    return generated_story
+
+def rep_view(request):
+    # Fetch the generated story
+    story_content = rep_story()
+
+    # Prepare the context for rendering the template
+    context = {
+        "story_content": story_content,
+    }
+
+    # Render the `story.html` template with the generated story
+    return render(request, "repstory.html", context)
+
+
+def story():
+    # Fetch all articles from the ArticleGroq model
+    try:
+        ranked_articles = ArticleGroq.objects.all()
+
+        if not ranked_articles.exists():
+            logger.warning("No articles found in ArticleGroq.")
+            return None, "No articles available to generate a story."
+
+        # Select a random article
+        random_article = random.choice(ranked_articles)
+
+        logger.info(f"Found Article: {random_article.title}")
+
+        # Check if polarized_content is available
+        if not random_article.polarized_content:
+            logger.warning("Selected article has no polarized content.")
+            return None, "No content available to generate a story."
+
+        # Prepare the message payload with the selected article's summary
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "You are a skilled writer for a major news station. Rewrite the following content into a compelling news story:"
+                ),
+            },
+            {
+                "role": "user",
+                "content": random_article.polarized_content,  # Use the summary of the selected article
+            },
+        ]
+
+        logger.info(f"Sending message content: {random_article.polarized_content}")
+
+        # Make the API call
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1024,  # Limit output tokens
+            top_p=1,
+            stream=False,  # Set to False for a single response
+            stop=None,
+        )
+
+        # Extract the generated story from the response
+        generated_story = completion.choices[0].message.content.strip()
+
+        if not generated_story:
+            generated_story = "No story could be generated from the article."
+
+        logger.info("Story generated successfully.")
+
+        # Return the generated story along with additional article details
+        return {
+            'generated_story': generated_story,
+            'url': random_article.url,
+            'published_at': random_article.published_at,
+            'date_processed': random_article.date_processed,
+        }, None  # Return None for error message if successful
+
+    except Exception as e:
+        logger.error(f"Error generating story: {str(e)}")
+        return None, f"Error: {str(e)}"
+
+def story_view(request):
+    # Fetch the generated story and additional article details
+    article_data, error_message = story()
+
+    # Prepare the context for rendering the template
+    context = {
+        "story_content": article_data['generated_story'] if article_data else error_message,
+        "url": article_data['url'] if article_data else None,
+        "published_at": article_data['published_at'] if article_data else None,
+        "date_processed": article_data['date_processed'] if article_data else None,
+    }
+    
+    # Render the `story.html` template with the generated story and article details
+    return render(request, "story.html", context)

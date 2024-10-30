@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Story</title>
+</head>
+<body>
+    <h1>Generated Story</h1>
+
+    {% if story_content %}
+        <p>{{ story_content }}</p>
+        <p><strong>Source:</strong> <a href="{{ url }}">{{ url }}</a></p>
+        <p><strong>Published At:</strong> {{ published_at }}</p>
+        <p><strong>Date Processed:</strong> {{ date_processed }}</p>
+    {% else %}
+        <p>{{ story_content }}</p>
+    {% endif %}
+</body>
+</html>

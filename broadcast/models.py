@@ -61,3 +61,24 @@ class DemArticle(models.Model):
     def __str__(self):
         return self.title
 
+class DemRankArticle(models.Model):
+    title = models.CharField(max_length=255)
+    summary = models.TextField()
+    rank = models.IntegerField()  # Field to store the rank
+    url = models.URLField()
+    published_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class RepRankArticle(models.Model):
+    title = models.CharField(max_length=255)
+    summary = models.TextField()
+    rank = models.IntegerField()  # Field to store the rank
+    url = models.URLField()
+    published_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

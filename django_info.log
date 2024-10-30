@@ -208,3 +208,526 @@ Watching for file changes with StatReloader
 "GET /broadcast/generate/ HTTP/1.1" 200 597
 "POST /broadcast/generate/ HTTP/1.1" 200 1136
 Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen HTTP/1.1" 301 0
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+Internal Server Error: /broadcast/gen/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 649, in generate_view
+    "Authorization": f"Bearer {settings.HUGGING_FACE_API_KEY}",
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Settings' object has no attribute 'HUGGING_FACE_API_KEY'
+"POST /broadcast/gen/ HTTP/1.1" 500 79361
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+"POST /broadcast/gen/ HTTP/1.1" 200 1062
+"POST /broadcast/gen/ HTTP/1.1" 200 1098
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /broadcast/gen/ HTTP/1.1" 200 1066
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+"POST /broadcast/gen/ HTTP/1.1" 200 604
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+"POST /broadcast/gen/ HTTP/1.1" 200 604
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 604
+"POST /broadcast/gen/ HTTP/1.1" 200 604
+Watching for file changes with StatReloader
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+"GET /broadcast/republic/ HTTP/1.1" 200 1532999
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/republic/ HTTP/1.1" 200 1532999
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 543
+"POST /broadcast/gen/ HTTP/1.1" 200 698
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 543
+"POST /broadcast/gen/ HTTP/1.1" 200 698
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 543
+Watching for file changes with StatReloader
+"GET /broadcast/gen/ HTTP/1.1" 200 543
+"POST /broadcast/gen/ HTTP/1.1" 200 703
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /broadcast/rankeddem
+"GET /broadcast/rankeddem HTTP/1.1" 404 6269
+Not Found: /broadcast/rankeddem
+"GET /broadcast/rankeddem HTTP/1.1" 404 6269
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/rankeddem HTTP/1.1" 301 0
+Internal Server Error: /broadcast/rankeddem/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 768, in refresh_and_display_ranked_articles
+    fetch_and_rank_democratic_viewpoints()
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 738, in fetch_and_rank_democratic_viewpoints
+    article_content = article.polarized_content or "No content available for analysis."
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DemArticle' object has no attribute 'polarized_content'
+"GET /broadcast/rankeddem/ HTTP/1.1" 500 79993
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/rankeddem/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 768, in refresh_and_display_ranked_articles
+    fetch_and_rank_democratic_viewpoints()
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 738, in fetch_and_rank_democratic_viewpoints
+    article_content = article.polarized_content or "No content available for analysis."
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DemArticle' object has no attribute 'polarized_content'
+"GET /broadcast/rankeddem/ HTTP/1.1" 500 79993
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/rankeddem/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 768, in refresh_and_display_ranked_articles
+    fetch_and_rank_democratic_viewpoints()
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 745, in fetch_and_rank_democratic_viewpoints
+    dem_rank_article = DemRankArticle(
+                       ^^^^^^^^^^^^^^
+NameError: name 'DemRankArticle' is not defined. Did you mean: 'DemArticle'?
+"GET /broadcast/rankeddem/ HTTP/1.1" 500 80337
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/rankeddem/ HTTP/1.1" 200 958340
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /broadcast/story
+"GET /broadcast/story HTTP/1.1" 404 6554
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story HTTP/1.1" 301 0
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 784, in generate_total_article_from_high_ranked_articles
+    high_ranked_articles = groq.query(query)
+                           ^^^^
+NameError: name 'groq' is not defined. Did you mean: 'Groq'?
+"GET /broadcast/story/ HTTP/1.1" 500 73657
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story HTTP/1.1" 301 0
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 787, in generate_total_article_from_high_ranked_articles
+    high_ranked_articles = client.query(query)  # Use the client variable
+                           ^^^^^^^^^^^^
+AttributeError: 'Groq' object has no attribute 'query'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 810, in generate_total_article_from_high_ranked_articles
+    return render(request, "story.html", {"article": f"Error fetching articles: {str(e)}"})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'ranked-democratic-articles' not found. 'ranked-democratic-articles' is not a valid view function or pattern name.
+"GET /broadcast/story/ HTTP/1.1" 500 125883
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 787, in generate_total_article_from_high_ranked_articles
+    high_ranked_articles = client.query(query)  # Use the client variable
+                           ^^^^^^^^^^^^
+AttributeError: 'Groq' object has no attribute 'query'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 810, in generate_total_article_from_high_ranked_articles
+    return render(request, "story.html", {"article": f"Error fetching articles: {str(e)}"})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'ranked-democratic-articles' not found. 'ranked-democratic-articles' is not a valid view function or pattern name.
+"GET /broadcast/story/ HTTP/1.1" 500 125883
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 787, in generate_total_article_from_high_ranked_articles
+    high_ranked_articles = client.query(query)  # Use the client variable
+                           ^^^^^^^^^^^^
+AttributeError: 'Groq' object has no attribute 'query'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 810, in generate_total_article_from_high_ranked_articles
+    return render(request, "story.html", {"article": f"Error fetching articles: {str(e)}"})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'ranked-democratic-articles' not found. 'ranked-democratic-articles' is not a valid view function or pattern name.
+"GET /broadcast/story/ HTTP/1.1" 500 125883
+Watching for file changes with StatReloader
+"GET /broadcast/rankeddem/ HTTP/1.1" 200 1916370
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+Watching for file changes with StatReloader
+"GET /broadcast/rankedrep HTTP/1.1" 301 0
+Internal Server Error: /broadcast/rankedrep/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 840, in rep_ranked_articles
+    fetch_and_rank_rebublic_viewpoints()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'fetch_and_rank_rebublic_viewpoints' is not defined. Did you mean: 'fetch_and_rank_republic_viewpoints'?
+"GET /broadcast/rankedrep/ HTTP/1.1" 500 73215
+"GET /broadcast/rankeddem/ HTTP/1.1" 200 2874400
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/rankedrep/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 840, in rep_ranked_articles
+    fetch_and_rank_rebublic_viewpoints()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'fetch_and_rank_rebublic_viewpoints' is not defined. Did you mean: 'fetch_and_rank_republic_viewpoints'?
+"GET /broadcast/rankedrep/ HTTP/1.1" 500 73352
+Internal Server Error: /broadcast/rankedrep/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 840, in rep_ranked_articles
+    fetch_and_rank_rebublic_viewpoints()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'fetch_and_rank_rebublic_viewpoints' is not defined. Did you mean: 'fetch_and_rank_republic_viewpoints'?
+"GET /broadcast/rankedrep/ HTTP/1.1" 500 73352
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/rankedrep/ HTTP/1.1" 200 1454920
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 469
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 1262
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 332
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 332
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 1841
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 1414
+"GET /broadcast/story/ HTTP/1.1" 200 1691
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 1667
+"GET /broadcast/story/ HTTP/1.1" 200 1546
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 1631
+"GET /broadcast/story/ HTTP/1.1" 200 1421
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/demstory/ HTTP/1.1" 200 1476
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/repstory/ HTTP/1.1" 200 1438
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/repstory/ HTTP/1.1" 200 1338
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/repstory/ HTTP/1.1" 200 1283
+"GET /broadcast/rankedrep/ HTTP/1.1" 200 2909530
+Not Found: /broadcast/democrat/
+"GET /broadcast/democrat/ HTTP/1.1" 404 7369
+"GET /broadcast/democratic/ HTTP/1.1" 200 896257
+"GET /broadcast/republic/ HTTP/1.1" 200 1532999
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 747160
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 604395
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /broadcast/stroy
+"GET /broadcast/stroy HTTP/1.1" 404 7625
+"GET /broadcast/story/ HTTP/1.1" 200 311
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 328
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 583
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 2756
+"GET /broadcast/story/ HTTP/1.1" 200 2468
+"GET /broadcast/story/ HTTP/1.1" 200 2700
+"GET /broadcast/story/ HTTP/1.1" 200 315
+"GET /broadcast/story/ HTTP/1.1" 200 315
+"GET /broadcast/story/ HTTP/1.1" 200 315
+"GET /broadcast/story/ HTTP/1.1" 200 2709
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 398
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 1068, in story_view
+    article_data, error_message = story()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+"GET /broadcast/story/ HTTP/1.1" 500 73298
+"GET /broadcast/story/ HTTP/1.1" 200 398
+"GET /broadcast/story/ HTTP/1.1" 200 398
+"GET /broadcast/story/ HTTP/1.1" 200 398
+Internal Server Error: /broadcast/story/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py", line 1068, in story_view
+    article_data, error_message = story()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+"GET /broadcast/story/ HTTP/1.1" 500 73298
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/story/ HTTP/1.1" 200 3936
+"GET /broadcast/story/ HTTP/1.1" 200 2824
+"GET /broadcast/story/ HTTP/1.1" 200 3257
+"GET /broadcast/story/ HTTP/1.1" 200 398
+"GET /broadcast/story/ HTTP/1.1" 200 398
+"GET /broadcast/story/ HTTP/1.1" 200 2941
+"GET /broadcast/reporter/ HTTP/1.1" 200 912
+"POST /broadcast/reporter/ HTTP/1.1" 200 3168
+"GET /broadcast/director/ HTTP/1.1" 200 4166
+"POST /broadcast/director/ HTTP/1.1" 200 991
+"GET /broadcast/story/ HTTP/1.1" 200 398
+"GET /broadcast/story/ HTTP/1.1" 200 3452
+"POST /broadcast/director/ HTTP/1.1" 200 1092
+"GET /broadcast/anchorman/ HTTP/1.1" 200 2664
+"POST /broadcast/anchorman/ HTTP/1.1" 200 36
+"GET /media/**[Opening.mp3 HTTP/1.1" 200 1202400
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/rankedrep/ HTTP/1.1" 200 4364140

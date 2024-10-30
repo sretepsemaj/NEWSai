@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranked Republican Articles</title>
+</head>
+<body>
+    <h1>Ranked Republican Articles</h1>
+
+    {% if ranked_articles %}
+        <ul>
+            {% for article in ranked_articles %}
+                <li>
+                    <strong>{{ article.title }}</strong><br>
+                    <p>{{ article.summary }}</p>
+                    <p><em>Rank: {{ article.rank }}</em></p>
+                    <p><a href="{{ article.url }}">Read more</a></p>
+                    <p><em>Published on: {{ article.published_at }}</em></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No ranked articles available.</p>
+    {% endif %}
+</body>
+</html>
