@@ -252,12 +252,12 @@ def anchorman_view(request):
 
 def news_view(request):
     # Fetch top headlines related to American elections
-    top_headlines = newsapi.get_top_headlines(q='American election',
+    top_headlines = newsapi.get_top_headlines(q='israel hamas war',
                                               language='en',
                                               country='us')
 
     # Fetch all articles related to American elections (optional)
-    all_articles = newsapi.get_everything(q='American election',
+    all_articles = newsapi.get_everything(q='israel hamas war',
                                           language='en',
                                           sort_by='relevancy')
 
@@ -354,7 +354,7 @@ def fetch_article_content(url):
         print(f"Error fetching {url}: {e}")
         return None, None
 
-def fetch_articles_view(request):
+def articles_list_view(request):
     """View to fetch and save articles, then render a success page."""
     fetch_and_save_articles()
     
@@ -365,45 +365,44 @@ def fetch_articles_view(request):
         print("Template 'fetch_success.html' does not exist.")
         return render(request, 'error.html', {'message': "Template not found."})
     
-def articles_list_view(request):
+def fetch_articles_view(request):
     articles = Article.objects.all()  # Fetch all articles from the database
     return render(request, 'articles_list.html', {'articles': articles})  # Render the articles list template
 
 def article_groq_view(request):
-    # Retrieve all articles from the Article model
-    articles = Article.objects.all()
+    # Retrieve the specific article (modify this query as needed)
+    article = Article.objects.filter(title__icontains='Hamas').first()  # Adjust the filter as necessary
 
-    # Counters to track progress
+    if not article:
+        logger.warning("No article found related to Hamas and Israel conflict.")
+        return render(request, "groq.html", {"error": "No article found."})
+
+    logger.info(f"Processing: {article.title} - {article.content[:50]}...")
+
     success_count = 0
     skipped_count = 0
 
-    # Loop through the articles and process them
-    for article in articles:
-        logger.info(f"Processing: {article.title} - {article.content[:50]}...")
-
-        # Check if the article fits within the 8k token limit
-        if len(article.content) > 8192:
-            logger.warning(f"Skipping: {article.title} (content exceeds 8k tokens)")
-            ArticleGroq.objects.create(
-                title=article.title,
-                polarized_content=None,
-                url=article.url,
-                published_at=article.published_at,
-                status='skipped'
-            )
-            skipped_count += 1
-            continue
-
+    if len(article.content) > 8192:
+        logger.warning(f"Skipping: {article.title} (content exceeds 8k tokens)")
+        ArticleGroq.objects.create(
+            title=article.title,
+            polarized_content=None,
+            url=article.url,
+            published_at=article.published_at,
+            status='skipped'
+        )
+        skipped_count += 1
+    else:
         try:
             # Prepare the API request payload
             messages = [
                 {
                     "role": "system",
                     "content": (
-                        "You are a helpful assistant. Take the following article "
-                        "seperate the democraticn and republican points and make nbotes"
-                        "should be listed under ech heading for the republican of democrate views"
-                        "try ro always make the notes short and conccise"
+                        "this is a articel about the hamas and isreali conflict"
+                        "separate the isreali hamas view in the articel. "
+                        "make notes for both side of the story"
+                        "Ensure the notes are objective and concise."
                     ),
                 },
                 {"role": "user", "content": article.content},
@@ -439,8 +438,7 @@ def article_groq_view(request):
         except Exception as e:
             logger.error(f"Error processing {article.title}: {str(e)}")
             skipped_count += 1
-
-    # Log the final counts
+            
     logger.info(f"Processing complete. Success: {success_count}, Skipped: {skipped_count}")
 
     # Retrieve all entries from ArticleGroq for rendering
@@ -453,7 +451,6 @@ def article_groq_view(request):
         "skipped_count": skipped_count,
     }
     return render(request, "groq.html", context)
-
 
 def fetch_republican_viewpoints():
     # Fetch all articles from the ArticleGroq model

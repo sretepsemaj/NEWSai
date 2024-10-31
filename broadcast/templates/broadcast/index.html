@@ -5,38 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Broadcast Home</title>
     <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #007acc;
+            margin-bottom: 20px;
+        }
+        p {
+            line-height: 1.6;
+            max-width: 600px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            color: #007acc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #005a99;
+            text-decoration: underline;
+        }
         .box {
-            border: 2px solid #000; /* Border color */
-            padding: 10px;          /* Space inside the box */
-            margin: 20px;           /* Space outside the box */
-            width: fit-content;     /* Adjust the width to fit content */
+            border: 2px solid #007acc;
+            padding: 15px;
+            margin: 20px;
+            width: fit-content;
+            text-align: center;
+            background-color: #eef6fc;
+        }
+        .box h2 {
+            margin: 0 0 10px;
+            color: #005a99;
         }
     </style>
 </head>
 <body>
     {% load static %} <!-- Load the static template tag library -->
-    
-    <h1>Welcome to NEWSai a LLM driven news processing sysytem! </h1>
-    <p>where LLM are used to sift through insane amount of data to make</p>
-    <p>all types of new news outlets possible the ability to take twelve differnt angles of</p>
-    <p>one event and being able to not only source your info but also deliver both sides of an</p>
-    <p>event and their grievances. this is just a demo, to prove that LLMs can do the writing</p>
-    <p>Just what they are fed and how to cataloge it for critizism is vital.</p>
+
+    <h1>Welcome to NEWSai, an LLM-driven news processing system!</h1>
+    <p>Where LLMs are used to sift through vast amounts of data to make all types of news outlets possible. Imagine taking twelve different angles on one event, sourcing your information, and delivering both sides of the story, including each perspective’s concerns and grievances.</p>
+    <p>This is just a demo, to prove that LLMs can be the writers, curators, and cataloguers for comprehensive news coverage. Responsible use is key to accurate, objective criticism.</p>
     <p></p>
-    <p>Work flow is the reporter makes the story the director makes the telepromter  </p>
-    <p>and we train a anchorman to deliver the news to the people and even personlizes it if we like.</p>
+    <p>Workflow: The Reporter creates the story, the Director makes the teleprompter script, and the Anchorman delivers the news to the audience—even personalizing it if desired.</p>
     <p></p>
-    <p>okay have fun playing around.</p>
+    <p>Have fun exploring these functionalities!</p>
+
     <ul>
         <li><a href="{% url 'reporter' %}">Reporter will find the political story</a></li>
-        <li><a href="{% url 'director' %}">Director will take the story and make a teleprompter</a></li>
-        <li><a href="{% url 'anchorman' %}">Anchorman will deliver the generated story</a></li>
-        <li><a href="{% url 'paperboy' %}">Paperboy is supposed to take the news to the people</a></li>
+        <li><a href="{% url 'director' %}">Director will create the teleprompter script</a></li>
+        <li><a href="{% url 'anchorman' %}">Anchorman will deliver the story</a></li>
+        <li><a href="{% url 'paperboy' %}">Paperboy will take the news to the people</a></li>
     </ul>
 
     <div class="box">
-        <h2>white paper</h2>
-        <a href="{% static 'files/whtpaper.txt' %}">click here for whtpaper</a>
+        <h2>White Paper</h2>
+        <a href="{% static 'files/whtpaper.txt' %}">Click here for the white paper</a>
     </div>
+
+    <script>
+        // JavaScript to add interactive styling effects
+        document.addEventListener("DOMContentLoaded", function() {
+            // Highlight effect on the white paper link when hovering over the box
+            const box = document.querySelector('.box');
+            box.addEventListener('mouseenter', function() {
+                box.style.backgroundColor = '#d0e9f8';  // Light blue background
+                box.style.transition = 'background-color 0.3s ease';
+            });
+            box.addEventListener('mouseleave', function() {
+                box.style.backgroundColor = '#eef6fc';  // Revert to original color
+            });
+
+            // Adding hover effect to list items
+            const listItems = document.querySelectorAll("li a");
+            listItems.forEach(item => {
+                item.addEventListener("mouseover", () => {
+                    item.style.color = "#003f66"; // Darker color on hover
+                });
+                item.addEventListener("mouseout", () => {
+                    item.style.color = "#007acc"; // Revert to original color
+                });
+            });
+        });
+    </script>
 </body>
 </html>

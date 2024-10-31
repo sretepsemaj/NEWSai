@@ -731,3 +731,101 @@ Watching for file changes with StatReloader
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 2845
 "GET /broadcast/rankedrep/ HTTP/1.1" 200 4364140
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 476208
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/news/ HTTP/1.1" 200 36072
+"GET /broadcast/articles/ HTTP/1.1" 200 387
+"GET /broadcast/news/ HTTP/1.1" 200 36072
+"GET /broadcast/news/ HTTP/1.1" 200 36072
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1911359
+Watching for file changes with StatReloader
+"GET /broadcast/news/ HTTP/1.1" 200 36072
+Watching for file changes with StatReloader
+"GET /broadcast/news/ HTTP/1.1" 200 35607
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 387
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 713864
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 721454
+"GET /broadcast/news/ HTTP/1.1" 200 35607
+"GET /broadcast/news/ HTTP/1.1" 200 35607
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 3801
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 6594
+"GET /broadcast/story/ HTTP/1.1" 200 2923
+"GET /broadcast/groq/ HTTP/1.1" 200 9486
+"GET /broadcast/story/ HTTP/1.1" 200 2839
+"GET /broadcast/story/ HTTP/1.1" 200 3273
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 99
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/news/ HTTP/1.1" 200 35833
+Watching for file changes with StatReloader
+"GET /broadcast/news/ HTTP/1.1" 200 35462
+Not Found: /broadcast/article/
+"GET /broadcast/article/ HTTP/1.1" 404 7634
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/fetch-articles HTTP/1.1" 301 0
+"GET /broadcast/news/ HTTP/1.1" 200 35462
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 387
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 783706
+"GET /broadcast/groq/ HTTP/1.1" 200 11893
+"GET /broadcast/story/ HTTP/1.1" 200 2991
+Watching for file changes with StatReloader
+"GET /broadcast/groq/ HTTP/1.1" 200 2875
+"GET /broadcast/story/ HTTP/1.1" 200 2730
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/anchorman/ HTTP/1.1" 200 1623
+"GET /broadcast/reporter/ HTTP/1.1" 200 912
+"GET /broadcast/reporter/ HTTP/1.1" 200 2733
+"POST /broadcast/reporter/ HTTP/1.1" 200 5343
+"POST /broadcast/reporter/ HTTP/1.1" 200 4988
+"GET /broadcast/director/ HTTP/1.1" 200 4165
+"GET /broadcast/director/ HTTP/1.1" 200 3153
+"GET /broadcast/director/ HTTP/1.1" 200 3153
+"GET /broadcast/director/ HTTP/1.1" 200 5873
+"POST /broadcast/director/ HTTP/1.1" 200 1030
+"GET /broadcast/anchorman/ HTTP/1.1" 200 2592
+"GET /broadcast/anchorman/ HTTP/1.1" 200 4479
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5461
+"POST /broadcast/anchorman/ HTTP/1.1" 200 36
+"GET /media/**[Opening.mp3 HTTP/1.1" 200 1162560
+"POST /broadcast/anchorman/ HTTP/1.1" 200 36
+"GET /media/**[Opening.mp3 HTTP/1.1" 200 1172160
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5698
+"GET /media/**[Opening.mp3 HTTP/1.1" 200 1172160
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5696
+"GET /media/**[Opening.mp3 HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5696
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5698
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/anchorman/ HTTP/1.1" 200 5698
+"GET /media/**[Opening.mp3 HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+Watching for file changes with StatReloader
+"GET /broadcast HTTP/1.1" 301 0
+"GET /broadcast/ HTTP/1.1" 200 1891
+"GET /broadcast/ HTTP/1.1" 200 3954
+"GET /static/files/whtpaper.txt HTTP/1.1" 200 4231

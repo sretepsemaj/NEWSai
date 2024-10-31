@@ -12,8 +12,8 @@
                 <strong>{{ article.title }}</strong><br>
                 Source: {{ article.source }}<br>
                 Published At: {{ article.published_at }}<br>
-                <p>{{ article.content }}</p>  <!-- Displaying the content -->
-                <a href="{{ article.url }}">Read more</a>
+                <p>{{ article.content }}</p>
+                <a href="{{ article.url }}">{{ article.url }}</a>  <!-- Link with URL displayed as text -->
             </li>
         {% endfor %}
     </ul>
