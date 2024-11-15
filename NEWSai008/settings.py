@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Set debug mode from the environment variable (default to False if not set)
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 DJANGO_SETTINGS_MODULE = os.getenv('DJANGO_SETTINGS_MODULE', 'NEWSai008.settings')
 
