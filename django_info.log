@@ -1422,3 +1422,24 @@ Watching for file changes with StatReloader
 /Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
 Watching for file changes with StatReloader
 "GET /broadcast/ HTTP/1.1" 200 11385
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/anchorman/ HTTP/1.1" 200 11381
+"GET /broadcast/director/ HTTP/1.1" 200 18938
+"GET /broadcast/reporter/ HTTP/1.1" 200 12194
+"GET /broadcast/reporter/ HTTP/1.1" 200 12194
+"GET /broadcast/ HTTP/1.1" 200 12194
+"GET / HTTP/1.1" 200 99
+"GET /broadcast/ HTTP/1.1" 200 12194
+"GET / HTTP/1.1" 200 99
+"GET /paperboy HTTP/1.1" 301 0
+"GET /paperboy/ HTTP/1.1" 200 99
+Not Found: /article
+"GET /article HTTP/1.1" 404 2563
+"GET /broadcast/director/ HTTP/1.1" 200 18938
+"GET /broadcast/anchorman/ HTTP/1.1" 200 11381
