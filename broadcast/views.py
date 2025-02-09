@@ -54,7 +54,7 @@ def reporter_view(request):
         },
         {
             "role": "user",
-            "content": "users name is techmaster tim  mr. TT and rumer has it he is the best coder on the plant. although not confirmend since he only does things on the youtube."
+            "content": "give the most informtion to be ablt ot give the user an idea of what trump is up to"
         }
     ],
     "max_tokens": "500",
@@ -157,7 +157,7 @@ def director_view(request):
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
-                        {"role": "system", "content": "Write a teleprompter script as official as it would be on the nightly news tleprompter and remeber the anchorman name is tech with tim."},
+                        {"role": "system", "content": "Write a teleprompter script as official as it would be on the nightly news tleprompter and remeber the anchorman"},
                         {"role": "user", "content": f"need this teleprompter for tech with tim:\n\n{reporter_response}"}
                     ],
                     max_tokens=200,  # Adjust the number of tokens based on your requirements

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .article-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .article-header {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .article-title {
+            color: #007bff;
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+        .article-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .article-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .article-source {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .analysis-container {
+            background-color: #e8f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .analysis-header {
+            color: #005a99;
+            margin: 0 0 15px 0;
+        }
+        .analysis-content {
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .metadata-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .metadata-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .metadata-value {
+            color: #333;
+        }
+        .original-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .original-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <div class="article-header">
+            <h1 class="article-title">{{ article.title }}</h1>
+            <div class="metadata-grid">
+                <div class="metadata-item">
+                    <div class="metadata-label">Source</div>
+                    <div class="metadata-value">{{ article.source }}</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Author</div>
+                    <div class="metadata-value">{{ article.author|default:"Unknown" }}</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Published</div>
+                    <div class="metadata-value">{{ article.published_at }}</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Retrieved</div>
+                    <div class="metadata-value">{{ article.date_extracted }}</div>
+                </div>
+            </div>
+        </div>
+
+        {% if article.description %}
+        <div class="article-source">
+            <h3>Description</h3>
+            <p>{{ article.description }}</p>
+        </div>
+        {% endif %}
+
+        <div class="article-content">
+            <h3>Full Content</h3>
+            {{ article.content|linebreaks }}
+        </div>
+
+        {% if has_analysis %}
+        <div class="analysis-container">
+            <h2 class="analysis-header">Groq Analysis</h2>
+            <div class="analysis-content">
+                {{ groq_analysis.polarized_content|linebreaks }}
+            </div>
+        </div>
+        {% endif %}
+
+        <a href="{{ article.url }}" class="original-link" target="_blank">Read Original Article →</a>
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'broadcast:articles_list' %}" class="nav-button">← Back to Articles</a>
+        {% if not has_analysis %}
+        <a href="{% url 'broadcast:article_groq' %}" class="nav-button">Generate Analysis</a>
+        {% endif %}
+    </div>
+</body>
+</html>

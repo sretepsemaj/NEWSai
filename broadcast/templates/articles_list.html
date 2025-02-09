@@ -3,19 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <title>Articles List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .articles-list {
+            list-style: none;
+            padding: 0;
+        }
+        .article-card {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .article-title {
+            color: #007bff;
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+            line-height: 1.3;
+        }
+        .article-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .meta-value {
+            color: #333;
+        }
+        .article-description {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+        }
+        .article-content {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            white-space: pre-line;
+        }
+        .article-content.collapsed {
+            max-height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .article-content.collapsed::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, white);
+        }
+        .article-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .article-link {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        .view-details {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        .view-details:hover {
+            background-color: #218838;
+        }
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            text-decoration: underline;
+        }
+        .expand-btn:hover {
+            color: #0056b3;
+        }
+        .analysis-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e8f4ff;
+            border-radius: 8px;
+        }
+        .analysis-header {
+            color: #005a99;
+            margin: 0 0 15px 0;
+        }
+        .analysis-content {
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+        .generate-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        .generate-btn:hover {
+            background-color: #0056b3;
+        }
+        .generate-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #deleteConfirmModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .modal-buttons {
+            margin-top: 20px;
+        }
+        .modal-buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .confirm-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .cancel-delete {
+            background-color: #6c757d;
+            color: white;
+        }
+        .no-articles {
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <h1>Articles</h1>
-    <ul>
-        {% for article in articles %}
-            <li>
-                <strong>{{ article.title }}</strong><br>
-                Source: {{ article.source }}<br>
-                Published At: {{ article.published_at }}<br>
-                <p>{{ article.content }}</p>
-                <a href="{{ article.url }}">{{ article.url }}</a>  <!-- Link with URL displayed as text -->
+    <div class="header">
+        <h1>Articles</h1>
+        <button class="delete-btn" onclick="showDeleteConfirmation()">Delete All Articles</button>
+    </div>
+
+    <ul class="articles-list">
+        {% for article_data in articles_data %}
+            <li class="article-card">
+                <h2 class="article-title">{{ article_data.article.title }}</h2>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Source</span>
+                        <span class="meta-value">{{ article_data.article.source }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Author</span>
+                        <span class="meta-value">{{ article_data.article.author|default:"Unknown" }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Published</span>
+                        <span class="meta-value">{{ article_data.article.published_at }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Retrieved</span>
+                        <span class="meta-value">{{ article_data.article.date_extracted }}</span>
+                    </div>
+                </div>
+
+                {% if article_data.article.description %}
+                <div class="article-description">
+                    {{ article_data.article.description }}
+                </div>
+                {% endif %}
+
+                <div class="article-content collapsed" id="content-{{ article_data.article.id }}">
+                    {{ article_data.article.content|linebreaks }}
+                </div>
+                
+                <button class="expand-btn" onclick="toggleContent('{{ article_data.article.id }}')">Show More</button>
+
+                <div class="analysis-container" id="analysis-{{ article_data.article.id }}" {% if not article_data.analysis %}style="display: none;"{% endif %}>
+                    <h3 class="analysis-header">Groq Analysis</h3>
+                    <div class="analysis-content">
+                        {% if article_data.analysis %}
+                            {{ article_data.analysis.content|linebreaks }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="article-actions">
+                    <a href="{{ article_data.article.url }}" class="article-link" target="_blank">
+                        Read original article
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 10H2V2H6V0H2C0.9 0 0 0.9 0 2V10C0 11.1 0.9 12 2 12H10C11.1 12 12 11.1 12 10V6H10V10Z" fill="currentColor"/>
+                            <path d="M7 0V2H9.59L3.76 7.83L5.17 9.24L11 3.41V6H13V0H7Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'broadcast:article_detail' article_data.article.id %}" class="view-details">View Full Details</a>
+                    {% if not article_data.analysis %}
+                    <button class="generate-btn" onclick="generateAnalysis('{{ article_data.article.id }}')" id="generate-btn-{{ article_data.article.id }}">
+                        Generate Analysis
+                    </button>
+                    {% endif %}
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-articles">
+                <h2>No articles found</h2>
+                <p>Try fetching some articles first.</p>
             </li>
         {% endfor %}
     </ul>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal">
+        <div class="modal-content">
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete all articles? This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="confirm-delete" onclick="deleteAllArticles()">Yes, Delete All</button>
+                <button class="cancel-delete" onclick="hideDeleteConfirmation()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSRF Token for AJAX -->
+    {% csrf_token %}
+
+    <script>
+        function showDeleteConfirmation() {
+            document.getElementById('deleteConfirmModal').style.display = 'block';
+        }
+
+        function hideDeleteConfirmation() {
+            document.getElementById('deleteConfirmModal').style.display = 'none';
+        }
+
+        function deleteAllArticles() {
+            $.ajax({
+                url: "{% url 'broadcast:delete_articles' %}",
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                success: function(response) {
+                    location.reload();  // Reload the page to show the articles are gone
+                },
+                error: function(xhr) {
+                    alert('Error deleting articles: ' + xhr.responseText);
+                }
+            });
+        }
+
+        function toggleContent(articleId) {
+            const content = document.getElementById(`content-${articleId}`);
+            const button = content.nextElementSibling;
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                button.textContent = 'Show Less';
+            } else {
+                content.classList.add('collapsed');
+                button.textContent = 'Show More';
+            }
+        }
+
+        function generateAnalysis(articleId) {
+            const analysisContainer = document.getElementById(`analysis-${articleId}`);
+            const generateButton = document.getElementById(`generate-btn-${articleId}`);
+            generateButton.disabled = true;
+            generateButton.textContent = 'Generating...';
+            
+            $.ajax({
+                url: `{% url 'broadcast:generate_analysis' 0 %}`.replace('0', articleId),
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                success: function(response) {
+                    analysisContainer.style.display = 'block';
+                    analysisContainer.querySelector('.analysis-content').innerHTML = response.analysis.replace(/\n/g, '<br>');
+                    generateButton.style.display = 'none';
+                },
+                error: function(xhr) {
+                    alert('Error generating analysis: ' + xhr.responseText);
+                    generateButton.disabled = false;
+                    generateButton.textContent = 'Generate Analysis';
+                }
+            });
+        }
+
+        // Close modal if clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('deleteConfirmModal')) {
+                hideDeleteConfirmation();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -35,12 +35,14 @@
             position: relative;
         }
         #script {
-            font-size: 2em;  /* Increase font size */
+            font-size: 2em;
             position: relative;
             transition: transform 0.1s linear;
         }
         audio {
             margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
         }
         button {
             background-color: #007acc;
@@ -51,8 +53,13 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
+            transition: background-color 0.3s;
         }
-        button:hover {
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
             background-color: #005a99;
         }
         .link {
@@ -63,78 +70,150 @@
         .link:hover {
             text-decoration: underline;
         }
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        #loading-message {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+        #error-message {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <h1>Anchorman Page</h1>
 
-    <h2>Teleprompter Script:</h2>
-    <div id="teleprompter-box">
-        <p id="script">{{ script }}</p>
+    {% if has_script %}
+        <h2>Teleprompter Script:</h2>
+        <div id="teleprompter-box">
+            <p id="script">{{ script }}</p>
+        </div>
+
+        <h2>Generated MP3:</h2>
+        <audio id="audio-player" controls>
+            <source id="audio-source" src="{{ mp3_url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Button to initiate MP3 generation -->
+        <button id="generate-mp3">Generate MP3</button>
+        <div id="loading-message">Generating MP3, please wait...</div>
+        <div id="error-message"></div>
+    {% else %}
+        <p>No script available. Please generate a script from the Director page first.</p>
+    {% endif %}
+
+    <div class="navigation">
+        <a href="{% url 'broadcast:director' %}" class="link">← Back to Director</a>
+        <a href="{% url 'broadcast:reporter' %}" class="link">Start New Story</a>
     </div>
-
-    <h2>Generated MP3:</h2>
-    <audio id="audio-player" controls>
-        <source id="audio-source" src="{{ mp3_url }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Button to initiate MP3 generation -->
-    <button id="generate-mp3" onclick="showLoading()">Generate MP3</button>
 
     <!-- JavaScript for AJAX request and loading message -->
     <script>
-        function showLoading() {
-            const loadingMessage = document.createElement("p");
-            loadingMessage.textContent = "Generating MP3, please wait...";
-            loadingMessage.style.color = "green";
-            loadingMessage.setAttribute("id", "loadingMessage");
-            document.body.appendChild(loadingMessage);
-        }
-
         $(document).ready(function() {
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
             $('#generate-mp3').click(function() {
+                const button = $(this);
+                const loadingMessage = $('#loading-message');
+                const errorMessage = $('#error-message');
+                
+                // Disable button and show loading
+                button.prop('disabled', true);
+                loadingMessage.show();
+                errorMessage.hide();
+
                 $.ajax({
-                    url: "{% url 'anchorman' %}",
+                    url: "{% url 'broadcast:anchorman' %}",
                     method: "POST",
-                    headers: { "X-Requested-With": "XMLHttpRequest" },
-                    data: JSON.stringify({ "action": "generate_mp3" }),
-                    contentType: "application/json",
+                    headers: { 
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRFToken": getCookie('csrftoken'),
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({
+                        "script": $("#script").text()
+                    }),
                     success: function(response) {
-                        $('#audio-source').attr('src', response.mp3_url);
-                        $('#audio-player')[0].load();
-                        $('#loadingMessage').remove();
+                        if (response.status === 'success') {
+                            loadingMessage.text('MP3 generated successfully!').css('color', '#28a745');
+                            if (response.mp3_url) {
+                                $('#audio-source').attr('src', response.mp3_url);
+                                $('#audio-player')[0].load();
+                            }
+                        } else {
+                            errorMessage.text('Error: ' + (response.error || 'Unknown error')).show();
+                            loadingMessage.hide();
+                        }
                     },
                     error: function(xhr) {
-                        alert('Error: ' + xhr.responseJSON.error);
-                        $('#loadingMessage').remove();
+                        let errorMsg = 'Error generating MP3';
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                errorMsg = response.error;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing response:', xhr.responseText);
+                        }
+                        errorMessage.text(errorMsg).show();
+                        loadingMessage.hide();
+                    },
+                    complete: function() {
+                        button.prop('disabled', false);
                     }
                 });
             });
 
             // Teleprompter scroll logic
             const audioPlayer = document.getElementById('audio-player');
-            const scriptElement = document.getElementById('script');
-            const teleprompterBox = document.getElementById('teleprompter-box');
+            const script = document.getElementById('script');
+            let scrollPosition = 0;
+            const scrollSpeed = 50; // Adjust this value to change scroll speed
 
-            // Define the speed multiplier here; adjust as needed for faster/slower scroll
-            const speedMultiplier = 1.5;
+            audioPlayer.addEventListener('play', function() {
+                // Start scrolling when audio plays
+                const scrollInterval = setInterval(function() {
+                    if (!audioPlayer.paused) {
+                        scrollPosition += 1;
+                        script.style.transform = `translateY(-${scrollPosition}px)`;
+                    }
+                }, scrollSpeed);
 
-            audioPlayer.addEventListener('timeupdate', function() {
-                const totalHeight = scriptElement.scrollHeight;
-                const currentTime = audioPlayer.currentTime;
-                const duration = audioPlayer.duration;
+                // Stop scrolling when audio ends or is paused
+                const stopScrolling = function() {
+                    clearInterval(scrollInterval);
+                };
 
-                // Calculate scroll position with speed multiplier for faster scrolling
-                const scrollPosition = (totalHeight - teleprompterBox.clientHeight) * (currentTime / duration) * speedMultiplier;
-
-                // Apply transform for scrolling effect
-                scriptElement.style.transform = `translateY(-${scrollPosition}px)`;
+                audioPlayer.addEventListener('pause', stopScrolling);
+                audioPlayer.addEventListener('ended', function() {
+                    stopScrolling();
+                    scrollPosition = 0;
+                    script.style.transform = 'translateY(0)';
+                });
             });
         });
     </script>
-
-    <a href="/" class="link">Go to Home</a>
 </body>
 </html>

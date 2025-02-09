@@ -20,49 +20,113 @@
         }
         h2 {
             color: #005a99;
+            margin-top: 30px;
         }
-        p {
-            line-height: 1.6;
+        .content-section {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .story-content {
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .sources {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
         button {
             background-color: #007acc;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 10px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
         }
-        button:hover {
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
             background-color: #005a99;
         }
         .link {
-            margin-top: 20px;
+            margin: 10px;
             color: #007acc;
             text-decoration: none;
         }
         .link:hover {
             text-decoration: underline;
         }
+        .navigation {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        #loading {
+            display: none;
+            color: #007acc;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .script-section {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007acc;
+        }
+        .error-message {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: none;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Director Page</h1>
+    <h1>Director's Studio</h1>
 
-    <h2>News Story:</h2>
-    <p>{{ reporter_response }}</p>
+    <div class="content-section">
+        <h2>Processed News Story</h2>
+        <div class="story-content">{{ reporter_response }}</div>
+    </div>
 
-    <h2>Teleprompter Script:</h2>
-    <p id="script">{{ teleprompter_script }}</p>
+    <div class="content-section">
+        <h2>Original Sources & Raw Data</h2>
+        <div class="story-content sources">{{ raw_story }}</div>
+    </div>
+
+    <div class="content-section script-section">
+        <h2>Teleprompter Script</h2>
+        <div id="script" class="story-content">{{ teleprompter_script }}</div>
+    </div>
 
     <!-- CSRF Token for AJAX -->
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-    <button id="generate-script" onclick="showLoading()">Generate Teleprompter Script</button>
+    <button id="generate-script" {% if not has_story %}disabled{% endif %}>
+        Generate Teleprompter Script
+    </button>
+    <div id="loading">Generating teleprompter script... Please wait...</div>
+    <div id="error-message" class="error-message"></div>
+
+    <div class="navigation">
+        <a href="{% url 'broadcast:reporter' %}" class="link">← Back to Reporter</a>
+        <a href="{% url 'broadcast:anchorman' %}" class="link">Go to Anchorman →</a>
+    </div>
 
     <!-- JavaScript for AJAX request and loading message -->
     <script>
@@ -70,40 +134,41 @@
             return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
         }
 
-        function showLoading() {
-            // Display a loading message while script is generating
-            const loadingMessage = document.createElement("p");
-            loadingMessage.textContent = "Generating teleprompter script, please wait...";
-            loadingMessage.style.color = "green";
-            loadingMessage.setAttribute("id", "loadingMessage");
-            document.body.appendChild(loadingMessage);
-        }
-
         $(document).ready(function() {
             $('#generate-script').click(function() {
+                $('#loading').show();
+                $('#error-message').hide();
+                $(this).prop('disabled', true);
+                
                 $.ajax({
-                    url: "{% url 'director' %}",  // Replace with actual URL pattern name if different
+                    url: "{% url 'broadcast:director' %}",
                     method: "POST",
                     headers: { 
                         "X-Requested-With": "XMLHttpRequest", 
                         "X-CSRFToken": getCSRFToken()
                     },
-                    data: JSON.stringify({ "action": "generate_script" }),
                     contentType: "application/json",
+                    data: JSON.stringify({ "action": "generate_script" }),
                     success: function(response) {
                         $('#script').text(response.teleprompter_script);
-                        $('#loadingMessage').remove();  // Remove loading message
+                        $('#loading').hide();
+                        $('#generate-script').prop('disabled', false);
                     },
                     error: function(xhr) {
-                        alert('Error: ' + xhr.responseJSON.error);
-                        $('#loadingMessage').remove();  // Remove loading message if error
+                        $('#loading').hide();
+                        $('#generate-script').prop('disabled', false);
+                        
+                        let errorMessage = 'Error generating script. Please try again.';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage = xhr.responseJSON.error;
+                        }
+                        
+                        $('#error-message').text(errorMessage).show();
+                        console.error('Script generation error:', xhr.responseText);
                     }
                 });
             });
         });
     </script>
-
-    <a href="{% url 'reporter' %}" class="link">Back to Reporter Page</a>
-    <a href="{% url 'anchorman' %}" class="link">Have the Anchorman deliver the script</a>
 </body>
 </html>

@@ -20,82 +20,214 @@
         }
         h2 {
             color: #005a99;
+            margin-top: 30px;
         }
-        p {
+        .content-section {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .story-content {
             line-height: 1.6;
+            white-space: pre-wrap;
+            margin: 20px 0;
         }
         .error {
             color: red;
+            padding: 10px;
+            background-color: #ffe6e6;
+            border-radius: 4px;
+            margin: 10px 0;
         }
         form {
-            margin-top: 20px;
             width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
+            max-width: 800px;
         }
         textarea {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin: 10px 0;
+            box-sizing: border-box;
         }
         button {
             background-color: #007acc;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 10px;
+            transition: background-color 0.3s;
         }
-        button:hover {
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
             background-color: #005a99;
         }
-        .link {
+        .process-button {
+            background-color: #28a745;
+        }
+        .process-button:hover:not(:disabled) {
+            background-color: #218838;
+        }
+        .loading {
+            display: none;
+            color: #007acc;
+            margin: 10px 0;
+        }
+        .error-message {
+            display: none;
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .navigation {
             margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .link {
             color: #007acc;
             text-decoration: none;
         }
         .link:hover {
             text-decoration: underline;
         }
+        .professional-story {
+            margin-top: 30px;
+            border-left: 4px solid #28a745;
+            padding-left: 20px;
+        }
+        .professional-story h2 {
+            color: #28a745;
+        }
+        .story-content {
+            white-space: pre-wrap;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .story-content p {
+            margin-bottom: 1em;
+        }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Reporter Page</h1>
+    <h1>Reporter's Desk</h1>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
+    <div class="content-section">
+        <div class="step-indicator">Step 1: Generate Raw News Data</div>
+        <form method="POST" action="{% url 'broadcast:reporter' %}">
+            {% csrf_token %}
+            <label for="query">Enter your query to find political news:</label>
+            <textarea id="query" name="query" rows="4" placeholder="Enter a prompt for your news story..."></textarea>
+            <button type="submit" id="generate-button">Generate Raw Story</button>
+        </form>
+        <div id="loading-raw" class="loading">Gathering news data...</div>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+
+    {% if raw_story %}
+    <div class="content-section">
+        <h2>Raw News Data:</h2>
+        <div class="story-content">{{ raw_story }}</div>
+        
+        <div class="step-indicator">Step 2: Process into Professional Story</div>
+        <button id="process-button" class="process-button" {% if not show_process_button %}disabled{% endif %}>
+            Process into Professional Story
+        </button>
+        <div id="loading-process" class="loading">Processing story into professional format...</div>
+        <div id="error-process" class="error-message"></div>
+        
+        <div id="professional-story" class="professional-story" style="display: none;">
+            <h2>Professional News Story:</h2>
+            <div class="story-content"></div>
+        </div>
+    </div>
     {% endif %}
 
-    {% if story %}
-        <h2>Generated News Story:</h2>
-        <p>{{ story }}</p>
-    {% else %}
-        <p>No story found.</p>
-    {% endif %}
+    <div class="navigation">
+        <a href="{% url 'broadcast:index' %}" class="link">← Back to Home</a>
+        <a href="{% url 'broadcast:director' %}" class="link">Continue to Director →</a>
+    </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <label for="query">For the demo, the model is set to find political news since this is a huge thing right now:</label><br>
-        <textarea id="query" name="query" rows="4" cols="50" placeholder="Enter a prompt for your news story..."></textarea><br><br>
-        <button type="submit" onclick="showLoading()">Generate News Story</button>
-    </form>
-
-    <a href="{% url 'director' %}" class="link">Check out the director to make the script</a><br>
-    <a href="/" class="link">Back to Home</a>
-
-    <!-- JavaScript for adding a simple loading message -->
     <script>
-        function showLoading() {
-            const loadingMessage = document.createElement("p");
-            loadingMessage.textContent = "Generating your story, please wait...";
-            loadingMessage.style.color = "green";
-            document.body.appendChild(loadingMessage);
-        }
+        $(document).ready(function() {
+            // Show loading when form is submitted
+            $('form').on('submit', function() {
+                $('#loading-raw').show();
+                $('#generate-button').prop('disabled', true);
+            });
+
+            // Handle story processing
+            $('#process-button').click(function() {
+                $('#loading-process').show();
+                $('#error-process').hide();
+                $(this).prop('disabled', true);
+                
+                $.ajax({
+                    url: "{% url 'broadcast:reporter' %}",
+                    method: "POST",
+                    headers: { 
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val(),
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({ 
+                        "action": "process_story"
+                    }),
+                    success: function(response) {
+                        if (response.error) {
+                            $('#error-process').text(response.error).show();
+                            $('#loading-process').hide();
+                            $('#process-button').prop('disabled', false);
+                        } else if (response.success && response.processed_story) {
+                            // Hide loading and show success
+                            $('#loading-process')
+                                .text('Story processed successfully!')
+                                .css('color', '#28a745');
+                            
+                            // Update and show the professional story
+                            $('#professional-story .story-content').html(response.processed_story);
+                            $('#professional-story').slideDown();
+                            
+                            // Keep button disabled to prevent multiple processing
+                            $('#process-button').text('Story Processed ✓');
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#loading-process').hide();
+                        $('#process-button').prop('disabled', false);
+                        
+                        let errorMessage = 'Error processing story. Please try again.';
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                errorMessage = response.error;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing response:', xhr.responseText);
+                        }
+                        
+                        $('#error-process').text(errorMessage).show();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
