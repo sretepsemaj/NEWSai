@@ -829,3 +829,596 @@ Watching for file changes with StatReloader
 "GET /broadcast/ HTTP/1.1" 200 1891
 "GET /broadcast/ HTTP/1.1" 200 3954
 "GET /static/files/whtpaper.txt HTTP/1.1" 200 4231
+Watching for file changes with StatReloader
+Not Found: /fetch-articles
+"GET /fetch-articles HTTP/1.1" 404 2854
+Not Found: /fetch-articles/
+"GET /fetch-articles/ HTTP/1.1" 404 2857
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 85
+Internal Server Error: /broadcast/reporter/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py", line 39, in reporter_view
+    return render(request, 'broadcast/reporter.html', {'story': story})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'director' not found. 'director' is not a valid view function or pattern name.
+"GET /broadcast/reporter/ HTTP/1.1" 500 152686
+"GET /broadcast/reporter/ HTTP/1.1" 200 5260
+"GET /broadcast/director/ HTTP/1.1" 200 7241
+"GET /broadcast/anchorman/ HTTP/1.1" 200 6301
+"GET / HTTP/1.1" 200 99
+"GET /broadcast/ HTTP/1.1" 200 5260
+"GET /broadcast/director/ HTTP/1.1" 200 7241
+"GET /broadcast/news/ HTTP/1.1" 200 35874
+"GET /broadcast/articles/ HTTP/1.1" 200 1917783
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1945834
+"POST /broadcast/delete-articles/ HTTP/1.1" 200 69
+"GET /broadcast/articles/ HTTP/1.1" 200 5018
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 87
+"GET /broadcast/articles/ HTTP/1.1" 200 89679
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/716/ HTTP/1.1" 200 5123
+"GET /broadcast/groq/ HTTP/1.1" 200 3754
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/717/ HTTP/1.1" 200 5104
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/718/ HTTP/1.1" 200 8045
+"GET /broadcast/articles/716/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/807/ HTTP/1.1" 200 5044
+"GET /broadcast/groq/ HTTP/1.1" 200 8057
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/724/ HTTP/1.1" 200 4964
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/716/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 117
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"GET /broadcast/articles/716/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/802/ HTTP/1.1" 200 4925
+"GET /broadcast/articles/ HTTP/1.1" 200 106015
+"POST /broadcast/delete-articles/ HTTP/1.1" 200 69
+"GET /broadcast/articles/ HTTP/1.1" 200 5772
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 121
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 117
+"GET /broadcast/articles/ HTTP/1.1" 200 799676
+"GET /broadcast/articles/822/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/ HTTP/1.1" 200 975729
+"GET /broadcast/articles/862/ HTTP/1.1" 200 17207
+"GET /broadcast/groq/ HTTP/1.1" 200 3996
+"GET /broadcast/articles/ HTTP/1.1" 200 975729
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /broadcast/articles/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py", line 168, in articles_list_view
+    return render(request, 'articles_list.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 489, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 605, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 701, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 611, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'get_item'
+"GET /broadcast/articles/ HTTP/1.1" 500 229910
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 117
+Internal Server Error: /broadcast/articles/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py", line 168, in articles_list_view
+    return render(request, 'articles_list.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 489, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 605, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 701, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 611, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'get_item'
+"GET /broadcast/articles/ HTTP/1.1" 500 229773
+Internal Server Error: /broadcast/articles/
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1035, in find_library
+    return parser.libraries[name]
+           ~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'broadcast_extras'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py", line 168, in articles_list_view
+    return render(request, 'articles_list.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1097, in load
+    lib = find_library(parser, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aaronjpeters/NEWSai/NEWSai008/venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1037, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'broadcast_extras' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+"GET /broadcast/articles/ HTTP/1.1" 500 194470
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1034285
+"GET /broadcast/articles/822/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/822/ HTTP/1.1" 200 5123
+"GET /broadcast/articles/ HTTP/1.1" 200 1034285
+"POST /broadcast/articles/822/analyze/ HTTP/1.1" 200 3488
+"GET /broadcast/articles/822/ HTTP/1.1" 200 8790
+"GET /broadcast/articles/ HTTP/1.1" 200 1037667
+"GET /broadcast/articles/824/ HTTP/1.1" 200 8299
+"GET /broadcast/articles/ HTTP/1.1" 200 1037667
+"GET /broadcast/articles/826/ HTTP/1.1" 200 4909
+"GET /broadcast/articles/ HTTP/1.1" 200 1037667
+"POST /broadcast/delete-articles/ HTTP/1.1" 200 69
+"GET /broadcast/articles/ HTTP/1.1" 200 10264
+"GET /broadcast/articles/ HTTP/1.1" 200 10264
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 121
+"GET /broadcast/articles/ HTTP/1.1" 200 1031420
+"GET /broadcast/articles/929/ HTTP/1.1" 200 12662
+"GET /broadcast/groq/ HTTP/1.1" 200 3907
+"GET /broadcast/groq/ HTTP/1.1" 200 7772
+"GET /broadcast/articles/ HTTP/1.1" 200 1034726
+"POST /broadcast/articles/929/analyze/ HTTP/1.1" 200 3177
+Internal Server Error: /broadcast/articles/940/analyze/
+"POST /broadcast/articles/940/analyze/ HTTP/1.1" 500 99
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1037803
+Internal Server Error: /broadcast/articles/1017/analyze/
+"POST /broadcast/articles/1017/analyze/ HTTP/1.1" 500 177
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1037803
+"POST /broadcast/articles/947/analyze/ HTTP/1.1" 200 2174
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1039790
+"POST /broadcast/articles/940/analyze/ HTTP/1.1" 200 4863
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1044623
+Watching for file changes with StatReloader
+"POST /broadcast/articles/1002/analyze/ HTTP/1.1" 200 709
+"POST /broadcast/articles/998/analyze/ HTTP/1.1" 200 1117
+"POST /broadcast/articles/978/analyze/ HTTP/1.1" 200 3437
+Watching for file changes with StatReloader
+"GET /broadcast/articles/ HTTP/1.1" 200 1049302
+"POST /broadcast/articles/1003/analyze/ HTTP/1.1" 200 707
+"POST /broadcast/delete-articles/ HTTP/1.1" 200 69
+"GET /broadcast/articles/ HTTP/1.1" 200 10264
+"GET /broadcast/fetch-articles/ HTTP/1.1" 200 121
+"GET /broadcast/articles/ HTTP/1.1" 200 1065896
+"GET /broadcast/articles/1038/ HTTP/1.1" 200 4970
+Watching for file changes with StatReloader
+Not Found: /reporter/
+"GET /reporter/ HTTP/1.1" 404 2839
+"GET /broadcast/reporter/ HTTP/1.1" 200 2743
+"POST /broadcast/reporter/ HTTP/1.1" 200 4566
+"POST /broadcast/reporter/ HTTP/1.1" 200 5811
+"POST /broadcast/reporter/ HTTP/1.1" 200 2799
+"GET /broadcast/director/ HTTP/1.1" 200 6765
+"POST /broadcast/director/ HTTP/1.1" 200 1141
+"POST /broadcast/director/ HTTP/1.1" 200 1080
+"POST /broadcast/director/ HTTP/1.1" 200 1142
+"GET /broadcast/anchorman/ HTTP/1.1" 200 6366
+Forbidden (CSRF token missing.): /broadcast/anchorman/
+"POST /broadcast/anchorman/ HTTP/1.1" 403 2491
+"GET /broadcast/reporter/ HTTP/1.1" 200 5811
+"GET /broadcast/director/ HTTP/1.1" 200 7857
+"POST /broadcast/director/ HTTP/1.1" 200 1169
+"GET /broadcast/anchorman/ HTTP/1.1" 200 6401
+"POST /broadcast/director/ HTTP/1.1" 200 1101
+Forbidden (CSRF token missing.): /broadcast/anchorman/
+"POST /broadcast/anchorman/ HTTP/1.1" 403 2491
+Forbidden (CSRF token missing.): /broadcast/anchorman/
+"POST /broadcast/anchorman/ HTTP/1.1" 403 2491
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 5811
+"POST /broadcast/reporter/ HTTP/1.1" 200 2799
+"GET /broadcast/reporter/ HTTP/1.1" 200 5811
+"POST /broadcast/reporter/ HTTP/1.1" 200 2799
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 8531
+"POST /broadcast/reporter/ HTTP/1.1" 200 8046
+"POST /broadcast/reporter/ HTTP/1.1" 200 5437
+"POST /broadcast/reporter/ HTTP/1.1" 200 8762
+"GET /broadcast/director/ HTTP/1.1" 200 8597
+Bad Request: /broadcast/director/
+"POST /broadcast/director/ HTTP/1.1" 400 44
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/director/ HTTP/1.1" 200 8597
+Bad Request: /broadcast/director/
+"POST /broadcast/director/ HTTP/1.1" 400 96
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/director/ HTTP/1.1" 200 8597
+Bad Request: /broadcast/director/
+"POST /broadcast/director/ HTTP/1.1" 400 96
+Bad Request: /broadcast/director/
+"POST /broadcast/director/ HTTP/1.1" 400 96
+"GET /broadcast/director/ HTTP/1.1" 200 9570
+"GET /broadcast/reporter/ HTTP/1.1" 200 8762
+"POST /broadcast/reporter/ HTTP/1.1" 200 8743
+"POST /broadcast/reporter/ HTTP/1.1" 200 5437
+"POST /broadcast/reporter/ HTTP/1.1" 200 11062
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 11795
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+"POST /broadcast/reporter/ HTTP/1.1" 200 3055
+"GET /broadcast/reporter/ HTTP/1.1" 200 15048
+"GET /broadcast/director/ HTTP/1.1" 200 14973
+"GET /broadcast/reporter/ HTTP/1.1" 200 15048
+"GET /broadcast/ HTTP/1.1" 200 15048
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 15048
+"GET /broadcast/director/ HTTP/1.1" 200 14973
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 15048
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 15048
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 16147
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 16899
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 33
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 15147
+"POST /broadcast/reporter/ HTTP/1.1" 200 6265
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 15147
+"POST /broadcast/reporter/ HTTP/1.1" 200 6424
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /broadcast/reporter/ HTTP/1.1" 200 10533
+Internal Server Error: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 500 108
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 400 42
+"POST /broadcast/reporter/ HTTP/1.1" 200 10323
+"POST /broadcast/reporter/ HTTP/1.1" 200 198
+"POST /broadcast/reporter/ HTTP/1.1" 200 10279
+"GET /broadcast/reporter/ HTTP/1.1" 200 10279
+"POST /broadcast/reporter/ HTTP/1.1" 200 210
+"GET /broadcast/reporter/ HTTP/1.1" 200 10603
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 11003
+"POST /broadcast/reporter/ HTTP/1.1" 200 10751
+"POST /broadcast/reporter/ HTTP/1.1" 200 4030
+"POST /broadcast/reporter/ HTTP/1.1" 200 10801
+Watching for file changes with StatReloader
+"POST /broadcast/reporter/ HTTP/1.1" 200 10564
+"POST /broadcast/reporter/ HTTP/1.1" 200 171
+"POST /broadcast/reporter/ HTTP/1.1" 200 10765
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 12064
+"POST /broadcast/reporter/ HTTP/1.1" 200 11897
+"POST /broadcast/reporter/ HTTP/1.1" 200 258
+"POST /broadcast/reporter/ HTTP/1.1" 200 11870
+Watching for file changes with StatReloader
+"POST /broadcast/reporter/ HTTP/1.1" 200 12677
+"POST /broadcast/reporter/ HTTP/1.1" 200 209
+"POST /broadcast/reporter/ HTTP/1.1" 200 11486
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 11131
+"POST /broadcast/reporter/ HTTP/1.1" 200 257
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 11131
+"POST /broadcast/reporter/ HTTP/1.1" 200 266
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 11131
+"POST /broadcast/reporter/ HTTP/1.1" 200 11283
+"POST /broadcast/reporter/ HTTP/1.1" 200 2721
+"GET /broadcast/director/ HTTP/1.1" 200 11523
+"POST /broadcast/director/ HTTP/1.1" 200 2696
+"GET /broadcast/anchorman/ HTTP/1.1" 200 8073
+Forbidden (CSRF token missing.): /broadcast/anchorman/
+"POST /broadcast/anchorman/ HTTP/1.1" 403 2491
+Forbidden (CSRF token missing.): /broadcast/anchorman/
+"POST /broadcast/anchorman/ HTTP/1.1" 403 2491
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/anchorman/ HTTP/1.1" 200 10350
+"POST /broadcast/anchorman/ HTTP/1.1" 200 65
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/anchorman/ HTTP/1.1" 200 10350
+"POST /broadcast/anchorman/ HTTP/1.1" 200 161
+"GET /media/audio/speech_1923c99e-900f-4348-bdd7-aaee84440d86.mp3 HTTP/1.1" 200 3422400
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"GET /broadcast/reporter/ HTTP/1.1" 200 11283
+"POST /broadcast/reporter/ HTTP/1.1" 200 2720
+"GET /broadcast/director/ HTTP/1.1" 200 14379
+"GET /broadcast/reporter/ HTTP/1.1" 200 11283
+"POST /broadcast/reporter/ HTTP/1.1" 200 11715
+Watching for file changes with StatReloader
+"GET /broadcast/reporter/ HTTP/1.1" 200 7246
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2845
+"POST /broadcast/reporter/ HTTP/1.1" 200 11423
+"POST /broadcast/reporter/ HTTP/1.1" 200 2633
+"GET /broadcast/news/ HTTP/1.1" 200 36529
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 99
+"GET /broadcast/ HTTP/1.1" 200 7246
+"POST /broadcast/reporter/ HTTP/1.1" 200 7314
+"POST /broadcast/reporter/ HTTP/1.1" 200 11385
+Internal Server Error: /broadcast/reporter/
+"POST /broadcast/reporter/ HTTP/1.1" 500 368
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/perplexity_workflow/services.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /broadcast/reporter/ HTTP/1.1" 200 5212
+"GET /broadcast/director/ HTTP/1.1" 200 14200
+"POST /broadcast/director/ HTTP/1.1" 200 3702
+"GET /broadcast/anchorman/ HTTP/1.1" 200 11294
+"POST /broadcast/anchorman/ HTTP/1.1" 200 161
+"GET /media/audio/speech_ebaa2e52-bc8e-4ff2-98ee-2b94688ddc16.mp3 HTTP/1.1" 200 4802880
+"GET /broadcast/reporter/ HTTP/1.1" 200 11385
+"GET / HTTP/1.1" 200 99
+"GET /broadcast/ HTTP/1.1" 200 11385
+Not Found: /broadcast/home
+"GET /broadcast/home HTTP/1.1" 404 6011
+Watching for file changes with StatReloader
+/Users/aaronjpeters/NEWSai/NEWSai009cc copy/broadcast/workflows/newsapi_workflow/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /broadcast/ HTTP/1.1" 200 11385
