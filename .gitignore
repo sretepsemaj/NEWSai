@@ -43,3 +43,11 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Media files
+media/
+*.mp3
+*.wav
+*.mp4
+*.avi
+*.mov
