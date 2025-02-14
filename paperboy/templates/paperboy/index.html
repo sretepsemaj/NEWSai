@@ -1,0 +1,19 @@
+<h1>Paperboy Page</h1>
+
+{% if mp3_url %}
+    <h2>Generated MP3:</h2>
+    <audio controls>
+        <source src="{{ mp3_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    {% if headline %}
+        <h2>Generated Headline:</h2>
+        <p>{{ headline }}</p>
+    {% else %}
+        <p>No headline generated yet.</p>
+    {% endif %}
+{% else %}
+    <p>No MP3 found. Please generate one on the Anchorman page.</p>
+    <a href="/broadcast/anchorman/">Go to Anchorman</a>
+{% endif %}

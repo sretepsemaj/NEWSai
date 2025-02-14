@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>  <!-- Display the headline -->
+    <p>Source: {{ source }}</p>  <!-- Display the source -->
+    <p>Published At: {{ published_at }}</p>  <!-- Display publication date -->
+    <p>{{ description }}</p>  <!-- Display description -->
+    <p>{{ content|safe }}</p>  <!-- Display the full content without truncation -->
+    <a href="{% url 'article_view' %}">Back to Articles</a>  <!-- Link back to the article list -->
+</body>
+</html>

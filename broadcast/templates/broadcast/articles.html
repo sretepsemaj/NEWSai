@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Broadcast Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .article-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            transition: transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .article-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .article-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'index' %}" class="back-button">Back to Home</a>
+        <h1>Broadcast Articles</h1>
+        
+        <div class="article-list">
+            {% for article in articles %}
+            <a href="{% url 'article_view' %}?id={{ article.id }}" class="article-card">
+                <h2 class="article-title">{{ article.title }}</h2>
+                <p>{{ article.content|truncatewords:30 }}</p>
+                <p class="article-date">{{ article.published_at|date:"F j, Y" }}</p>
+            </a>
+            {% empty %}
+            <p>No articles available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

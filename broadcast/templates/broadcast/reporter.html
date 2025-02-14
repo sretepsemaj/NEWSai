@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporter Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #error-message {
+            color: #e74c3c;
+            background-color: #fadbd8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        #story-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #story-container h2 {
+            color: #2980b9;
+            margin-top: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        form button:hover {
+            background-color: #2980b9;
+        }
+        #loading-indicator {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: #7f8c8d;
+            display: none;
+        }
+        .navigation {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .navigation a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 15px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navigation a:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporter Page</h1>
+
+    <div id="error-message"></div>
+
+    <div id="story-container">
+        {% if story %}
+            <h2>Generated News Story:</h2>
+            <p>{{ story }}</p>
+        {% else %}
+            <p>No story found. Generate a new one below.</p>
+        {% endif %}
+    </div>
+
+    <form id="query-form" method="POST" action="">
+        {% csrf_token %}
+        <label for="query">Enter your query:</label>
+        <textarea id="query" name="query" rows="4" cols="50" placeholder="Enter a prompt for your news story..."></textarea>
+        <button type="submit">Generate News Story</button>
+    </form>
+
+    <div id="loading-indicator">Generating your news story...</div>
+
+    <div class="navigation">
+        <a href="{% url 'director' %}">Go to Director Page</a>
+        <a href="{% url 'anchorman' %}">Go to Anchorman Page</a>
+        <a href="/">Back to Home</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const $form = $('#query-form');
+            const $loadingIndicator = $('#loading-indicator');
+            const $errorMessage = $('#error-message');
+            const $storyContainer = $('#story-container');
+            const $submitButton = $form.find('button[type="submit"]');
+
+            $form.on('submit', function(e) {
+                e.preventDefault();
+                
+                $loadingIndicator.show();
+                $errorMessage.hide();
+                $storyContainer.hide();
+                $submitButton.prop('disabled', true).text('Generating...');
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $loadingIndicator.hide();
+                        $submitButton.prop('disabled', false).text('Generate News Story');
+                        
+                        if (response.story) {
+                            $storyContainer.html(`
+                                <h2>Generated News Story:</h2>
+                                <div>${response.story.replace(/\n/g, '<br>')}</div>
+                            `).show();
+                            scrollToStory();
+                        } else {
+                            showError('No story was generated. Please try again.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $loadingIndicator.hide();
+                        $submitButton.prop('disabled', false).text('Generate News Story');
+                        showError('An error occurred while generating the story. Please try again.');
+                    }
+                });
+            });
+
+            function showError(message) {
+                $errorMessage.text(message).fadeIn();
+            }
+
+            function scrollToStory() {
+                $('html, body').animate({
+                    scrollTop: $storyContainer.offset().top - 20
+                }, 500);
+            }
+
+            // Check if there's an existing story and scroll to it
+            if ($storyContainer.children().length > 1) {
+                scrollToStory();
+            }
+        });
+    </script>
+</body>
+</html>
